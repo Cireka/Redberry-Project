@@ -1,0 +1,120 @@
+.PersonalInformation {
+  max-width: 160rem;
+  margin: 0 auto;
+}
+.PersonalInformation {
+  max-width: 160rem;
+  margin: 0 auto;
+}
+.PersonalInformationContainer {
+  margin-top: 4.5rem;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 14.2rem;
+}
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 5.4rem;
+}
+.PositionParrent,
+.EmployerParrent,
+.TwinInputParrents,
+.DecsriptionParrent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.PositionParrent > input,
+.EmployerParrent > input {
+  text-indent: 1.6rem;
+  width: 100%;
+  height: 4.8rem;
+  background: #ffffff;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+}
+.PositionParrent > input:focus,
+.EmployerParrent > input:focus,
+.TwinInputParrents > input:focus {
+  outline: none;
+}
+.PositionParrent > label,
+.EmployerParrent > label,
+.TwinInputParrents > label,
+.DecsriptionParrent > label {
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #000000;
+}
+.Hint {
+  font-size: 1.4rem;
+  color: #2e2e2e;
+  font-weight: 300;
+}
+.TwinInputParrents > input {
+  padding: 1.6rem;
+  width: 37.1rem;
+  height: 4.8rem;
+  background: #ffffff;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+}
+.StartAndEndDateParrent {
+  display: flex;
+  justify-content: space-between;
+}
+.DecsriptionParrent > input {
+  background: #ffffff;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  padding-top: 1.3rem;
+  padding-bottom: 8.9rem;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+}
+.DecsriptionParrent > input:focus {
+  outline: none;
+}
+
+.AdditionalExperiance {
+  margin-top: 4.9rem;
+  border: none;
+  width: 28.9rem;
+  height: 4.8rem;
+  background: #62a1eb;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #ffffff;
+}
+.AdditionalExperiance:hover {
+  cursor: pointer;
+  background-color: #72aaed;
+}
+.AdditionalExperiance:active {
+  background-color: #5891d4;
+}
+.Border {
+  content: "";
+  border: 1px solid #c1c1c1;
+}
+.NavButtonsParrent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.NavButtons {
+  width: 11.3rem;
+  height: 4.8rem;
+  color: white;
+  background: #6b40e3;
+  border-radius: 4px;
+  border: none;
+
+  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}

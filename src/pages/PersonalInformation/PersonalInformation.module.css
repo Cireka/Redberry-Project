@@ -1,0 +1,158 @@
+.PersonalInformation {
+  max-width: 160rem;
+  margin: 0 auto;
+}
+.PersonalInformationContainer {
+  margin-top: 4.5rem;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 14.2rem;
+}
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 5.4rem;
+}
+.HeadingParrent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid #1a1a1a;
+  margin-bottom: 7.7rem;
+}
+.HeadingParrent > h1 {
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: #1a1a1a;
+}
+.HeadingParrent > p {
+  font-weight: 400;
+  font-size: 2.4rem;
+  color: #1a1a1a;
+}
+.PersonalInfoFormParrent {
+  margin: 0 6.2rem;
+}
+.NameInputParrent,
+.emailParrent,
+.mobileParrent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.NameAndLastNameParrent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5.6rem;
+}
+.Label {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #000000;
+}
+.Hint {
+  font-size: 1.4rem;
+  color: #2e2e2e;
+  font-weight: 300;
+}
+.NameInputParrent > input {
+  text-indent: 1.6rem;
+  width: 371px;
+  height: 48px;
+  background: #ffffff;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+}
+.NameInputParrent > input:focus,
+.aboutMeParrent > input:focus {
+  outline: none;
+}
+
+.PhotoUploadParrent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.9rem;
+}
+.PhotoUploadParrent > p {
+  font-weight: 500;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+  color: #1a1a1a;
+}
+.PhotoUploadParrent > button {
+  border: none;
+  width: 10.7rem;
+  height: 2.7rem;
+  background: #0e80bf;
+  border-radius: 4px;
+
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #ffffff;
+}
+.PhotoUploadParrent > button:hover {
+  cursor: pointer;
+  background-color: #268dc5;
+}
+.PhotoUploadParrent > button:active {
+  background-color: #0d73ac;
+}
+.aboutMeParrent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.aboutMeParrent > label {
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #000000;
+}
+.aboutMeParrent > input {
+  position: relative;
+  width: 79.8rem;
+  padding-top: 1.3rem;
+  padding-bottom: 6.9rem;
+
+  background: #ffffff;
+  border: 1px solid #bcbcbc;
+  border-radius: 0.4rem;
+
+  text-indent: 10px;
+  vertical-align: top;
+}
+.emailParrent > input,
+.mobileParrent > input {
+  width: 79.8rem;
+  height: 4.8rem;
+  text-indent: 1.6rem;
+  border: 1px solid #bcbcbc;
+  border-radius: 0.4rem;
+}
+
+.emailParrent > input:focus {
+  outline: none;
+}
+.submitParrent {
+  display: flex;
+  justify-content: flex-end;
+}
+.submitParrent > button {
+  background-color: #6b40e3;
+  border-radius: 4px;
+  padding: 1.3rem 3.5rem;
+  letter-spacing: 0.08em;
+  border: none;
+  font-size: 1.6rem;
+  color: #ffffff;
+  font-weight: 500;
+}
+.submitParrent > button:hover {
+  cursor: pointer;
+  background-color: #7a53e6;
+}
+.submitParrent > button:active {
+  background-color: #603acc;
+}
