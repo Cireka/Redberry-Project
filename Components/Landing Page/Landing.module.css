@@ -1,0 +1,52 @@
+.Landing {
+  background-image: url("../../public/Landing\ Page\ Content/shutterstock_2189773743 1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 108rem;
+  padding: 1rem;
+  position: relative;
+}
+.LandingContainer {
+  max-width: 160rem;
+  margin: 0 auto;
+  margin-top: 2.5rem;
+  padding-bottom: 2.6rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+.Logo {
+  width: 23.6rem;
+  height: 3.8rem;
+}
+
+.ResumeButton {
+  position: absolute;
+  background-color: #1a1a1a;
+  border: none;
+  width: 46.4rem;
+  height: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: calc(50% - 46.4rem / 2);
+  top: 51.3rem;
+  border-radius: 0.8rem;
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 2.4rem;
+  color: #ffffff;
+}
+.ResumeButton:hover {
+  cursor: pointer;
+  background-color: #313131;
+}
+.ResumeButton:active {
+  background-color: #171717;
+}
+.BackgroundLogo {
+  position: absolute;
+  width: 29.9rem;
+  height: 29.9rem;
+  left: 107.6rem;
+  top: 47.3rem;
+  z-index: -10;
+}
