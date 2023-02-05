@@ -1,9 +1,9 @@
-import HeadingParrent from "Components/Landing Page/UI/HeadingParrent";
+import HeadingParrent from "Components/UI/HeadingParrent";
 import style from "./Education.module.css";
 import { useRouter } from "next/router";
-import TwinInput from "Components/Landing Page/UI/Twin Inputs/TwinInput";
-import WideInput from "Components/Landing Page/UI/WideInput/WideInput";
-import AdditionalInformationBox from "Components/Landing Page/UI/AdditionalInformationBox/AdditionalInformationBox";
+import TwinInput from "Components/UI/Twin Inputs/TwinInput";
+import WideInput from "Components/UI/WideInput/WideInput";
+import AdditionalInformationBox from "Components/UI/AdditionalInformationBox/AdditionalInformationBox";
 
 const Education = () => {
   const router = useRouter();

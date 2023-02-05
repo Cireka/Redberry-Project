@@ -6,6 +6,10 @@ const TwinInput = (props) => {
         {props.label}
       </label>
       <input
+        value={props.value}
+        onChange={props.onChange && props.onChange}
+        ref={props.ref && props.ref}
+        required={props.Req}
         placeholder={props.placeHolder}
         type={props.type}
         id={props.id}

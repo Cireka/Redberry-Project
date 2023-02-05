@@ -1,0 +1,47 @@
+.Name {
+  color: #f93b1d;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 3.4rem;
+}
+.ContactsParrent {
+  margin-top: 1.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+.Contact {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+}
+.AboutMeParrent {
+  margin-top: 3.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.AboutMeParrent > h2 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #f93b1d;
+}
+.AboutMeParrent > p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+
+  text-transform: lowercase;
+
+  color: #000000;
+}
+.Border {
+  margin-top: 1.9rem;
+  content: "";
+  border: 1px solid #c8c8c8;
+}

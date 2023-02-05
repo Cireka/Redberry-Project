@@ -6,7 +6,11 @@ const AdditionalInformationBox = (props) => {
       <label>
         {props.label} {!props.req && "(არასავალდებულო)"}
       </label>
-      <input placeholder={props.placeholder} type="text" />
+      <input
+        onChange={props.onChange}
+        placeholder={props.placeholder}
+        type="text"
+      />
     </div>
   );
 };
