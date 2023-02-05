@@ -1,12 +1,12 @@
-.ExperianceIformation {
+.EducationInformation {
   max-width: 160rem;
   margin: 0 auto;
 }
-.ExperianceIformation {
+.EducationInformation {
   max-width: 160rem;
   margin: 0 auto;
 }
-.ExperianceIformationContainer {
+.EducationIformationContainer {
   margin-top: 4.5rem;
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -18,17 +18,23 @@
   flex-direction: column;
   gap: 5.4rem;
 }
-.PositionParrent,
-.EmployerParrent,
+.InstituteParrent,
 .TwinInputParrents,
 .DecsriptionParrent {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
 }
+.TwinInputParrents > input {
+  padding: 1.6rem;
+  width: 37.1rem;
+  height: 4.8rem;
+  background: #ffffff;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+}
 
-.PositionParrent > input,
-.EmployerParrent > input {
+.InstituteParrent > input {
   text-indent: 1.6rem;
   width: 100%;
   height: 4.8rem;
@@ -36,13 +42,11 @@
   border: 1px solid #bcbcbc;
   border-radius: 4px;
 }
-.PositionParrent > input:focus,
-.EmployerParrent > input:focus,
+.InstituteParrent > input:focus,
 .TwinInputParrents > input:focus {
   outline: none;
 }
-.PositionParrent > label,
-.EmployerParrent > label,
+.InstituteParrent > label,
 .TwinInputParrents > label,
 .DecsriptionParrent > label {
   font-weight: 600;
@@ -54,18 +58,11 @@
   color: #2e2e2e;
   font-weight: 300;
 }
-.TwinInputParrents > input {
-  padding: 1.6rem;
-  width: 37.1rem;
-  height: 4.8rem;
-  background: #ffffff;
-  border: 1px solid #bcbcbc;
-  border-radius: 4px;
-}
 .StartAndEndDateParrent {
   display: flex;
   justify-content: space-between;
 }
+
 .DecsriptionParrent > input {
   background: #ffffff;
   border: 1px solid #bcbcbc;
@@ -78,7 +75,10 @@
 .DecsriptionParrent > input:focus {
   outline: none;
 }
-
+.Border {
+  content: "";
+  border: 1px solid #c1c1c1;
+}
 .AdditionalExperiance {
   border: none;
   width: 28.9rem;
@@ -95,10 +95,6 @@
 }
 .AdditionalExperiance:active {
   background-color: #5891d4;
-}
-.Border {
-  content: "";
-  border: 1px solid #c1c1c1;
 }
 .NavButtonsParrent {
   display: flex;

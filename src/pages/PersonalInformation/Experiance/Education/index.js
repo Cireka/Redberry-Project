@@ -1,60 +1,42 @@
 import HeadingParrent from "Components/Landing Page/UI/HeadingParrent";
-import style from "./Experiance.module.css";
+import style from "./Education.module.css";
 import { useRouter } from "next/router";
 
-const Experiance = () => {
+const Education = () => {
   const router = useRouter();
   const goBackHandler = (event) => {
     event.preventDefault();
     router.back();
   };
-  const goBackForwardsHandler = (event) => {
-    event.preventDefault();
-    router.push("/PersonalInformation/Experiance/Education");
-  };
-
   return (
-    <section className={style.ExperianceIformation}>
-      <div className={style.ExperianceIformationContainer}>
-        <div className={style.ExperianceInfoParrent}>
-          <HeadingParrent Text={"გამოცდილება"} Nav={"2/3"} />
+    <section className={style.EducationInformation}>
+      <div className={style.EducationIformationContainer}>
+        <div className={style.EducationInfoParrent}>
+          <HeadingParrent Text={"განათლება"} Nav={"3/3"} />
           <form className={style.Form}>
-            <div className={style.PositionParrent}>
+            <div className={style.InstituteParrent}>
               <label className={style.Label} for="position">
-                თანამდებობა
+                სასწავლებელი
               </label>
               <input
-                placeholder="დეველოპერი, დიზაინერ, ა.შ."
+                placeholder="სასწავლებელი"
                 type="text"
                 id="position"
                 name="position"
               />
               <hint className={style.Hint}>მინიმუმ 2 სიმბოლო</hint>
             </div>
-            <div className={style.EmployerParrent}>
-              <label className={style.Label} for="Employer">
-                დამსაქმებელი
-              </label>
-              <input
-                placeholder="დამსაქმებელი"
-                type="text"
-                id="Employer"
-                name="Employer"
-              />
-              <hint className={style.Hint}>მინიმუმ 2 სიმბოლო</hint>
-            </div>
             <div className={style.StartAndEndDateParrent}>
               <div className={style.TwinInputParrents}>
                 <label className={style.Label} for="Employer">
-                  დაწყების რიცხვი
+                  ხარისხი
                 </label>
                 <input
-                  placeholder="დამსაქმებელი"
-                  type="date"
+                  placeholder="არჩიეთ ხარისხი"
+                  type="text"
                   id="Employer"
                   name="Employer"
                 />
-                <hint className={style.Hint}>მინიმუმ 2 სიმბოლო</hint>
               </div>
               <div className={style.TwinInputParrents}>
                 <label className={style.Label} for="Employer">
@@ -66,7 +48,6 @@ const Experiance = () => {
                   id="Employer"
                   name="Employer"
                 />
-                <hint className={style.Hint}>მინიმუმ 2 სიმბოლო</hint>
               </div>
             </div>
             <div className={style.DecsriptionParrent}>
@@ -74,7 +55,7 @@ const Experiance = () => {
                 აღწერა
               </label>
               <input
-                placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
+                placeholder="განათლების აღწერა"
                 type="text"
                 id="Employer"
                 name="Employer"
@@ -88,12 +69,7 @@ const Experiance = () => {
               <button onClick={goBackHandler} className={style.NavButtons}>
                 უკან
               </button>
-              <button
-                onClick={goBackForwardsHandler}
-                className={style.NavButtons}
-              >
-                წინ
-              </button>
+              <button className={style.NavButtons}>დასრულება</button>
             </div>
           </form>
         </div>
@@ -101,4 +77,4 @@ const Experiance = () => {
     </section>
   );
 };
-export default Experiance;
+export default Education;

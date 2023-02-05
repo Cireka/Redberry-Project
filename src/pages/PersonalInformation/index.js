@@ -3,9 +3,11 @@ import HeadingParrent from "Components/Landing Page/UI/HeadingParrent";
 import { useRouter } from "next/router";
 
 const PersonalInformation = () => {
-  const route = useRouter();
-  const SubmitHandler = () => {
-    route.push("./PersonalInformation/Experiance");
+  const router = useRouter();
+
+  const SubmitHandler = (event) => {
+    event.preventDefault();
+    router.push("/PersonalInformation/Experiance");
   };
   return (
     <section className={style.PersonalInformation}>
