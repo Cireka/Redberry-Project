@@ -1,0 +1,28 @@
+.TwinInputParrents {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.TwinInputParrents > input {
+  padding: 1.6rem;
+  width: 37.1rem;
+  height: 4.8rem;
+  background: #ffffff;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+}
+
+.TwinInputParrents > input:focus {
+  outline: none;
+}
+
+.TwinInputParrents > label {
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #000000;
+}
+.Hint {
+  font-size: 1.4rem;
+  color: #2e2e2e;
+  font-weight: 300;
+}

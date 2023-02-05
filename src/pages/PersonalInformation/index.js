@@ -1,6 +1,9 @@
 import style from "./PersonalInformation.module.css";
 import HeadingParrent from "Components/Landing Page/UI/HeadingParrent";
 import { useRouter } from "next/router";
+import TwinInput from "Components/Landing Page/UI/Twin Inputs/TwinInput";
+import WideInput from "Components/Landing Page/UI/WideInput/WideInput";
+import AdditionalInformationBox from "Components/Landing Page/UI/AdditionalInformationBox/AdditionalInformationBox";
 
 const PersonalInformation = () => {
   const router = useRouter();
@@ -16,64 +19,50 @@ const PersonalInformation = () => {
           <HeadingParrent Text={"პირადი ინფო"} Nav={"1/3"} />
           <from className={style.Form}>
             <div className={style.NameAndLastNameParrent}>
-              <div className={style.NameInputParrent}>
-                <label className={style.Label} for="name">
-                  სახელი
-                </label>
-                <input placeholder="ანზორ" type="text" id="name" name="name" />
-                <hint className={style.Hint}>
-                  მინიმუმ 2 ასო, ქართული ასოები
-                </hint>
-              </div>
-              <div className={style.NameInputParrent}>
-                <label className={style.Label} for="lastName">
-                  გვარი
-                </label>
-                <input
-                  placeholder="მუმლაძე"
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                />
-                <hint className={style.Hint}>
-                  მინიმუმ 2 ასო, ქართული ასოები
-                </hint>
-              </div>
+              <TwinInput
+                type="text"
+                id="Name"
+                name="Name"
+                placeHolder={"ანზორ"}
+                hint={true}
+                customHint={"მინიმუმ 2 ასო, ქართული ასოები"}
+                label={"სახელი"}
+              />
+              <TwinInput
+                type="text"
+                id="LastName"
+                name="LastName"
+                placeHolder={"მუმლაძე"}
+                hint={true}
+                customHint={"მინიმუმ 2 ასო, ქართული ასოები"}
+                label={"გვარი"}
+              />
             </div>
             <div className={style.PhotoUploadParrent}>
               <p>პირადი ფოტოს ატვირთვა</p>
               <button>ატვირთვა</button>
             </div>
-            <div className={style.aboutMeParrent}>
-              <label>ჩემს შესახებ (არასავალდებულო)</label>
-              <input placeholder="ზოგადი ინფო შენს შესახებ" type="text" />
-            </div>
-            <div className={style.emailParrent}>
-              <label className={style.Label} for="email">
-                ელ.ფოსტა
-              </label>
-              <input
-                id="email"
-                name="email"
-                placeholder="anzor666@redberry.ge"
-                type="email"
-              />
-              <hint className={style.Hint}>მინიმუმ 2 ასო, ქართული ასოები</hint>
-            </div>
-            <div className={style.mobileParrent}>
-              <label className={style.Label} for="mobile">
-                მობილურის ნომერი
-              </label>
-              <input
-                id="mobile"
-                name="mobile"
-                placeholder="+995 551 12 34 56"
-                type="tel"
-              />
-              <hint className={style.Hint}>
-                უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს
-              </hint>
-            </div>
+            <AdditionalInformationBox
+              label={"ჩემს შესახებ"}
+              placeholder={"ზოგადი ინფო შენს შესახებ"}
+              req={false}
+            />
+            <WideInput
+              placeHolder={"anzor666@redberry.ge"}
+              name={"email"}
+              id={"email"}
+              type={"email"}
+              label={"ელ.ფოსტა"}
+              hint={"მინიმუმ 2 ასო, ქართული ასოები"}
+            />
+            <WideInput
+              placeHolder={"+995 551 12 34 56"}
+              name={"mobile"}
+              id={"mobile"}
+              type={"mobile"}
+              label={"მობილურის ნომერი"}
+              hint={"უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს"}
+            />
             <div className={style.submitParrent}>
               <button onClick={SubmitHandler}>შემდეგი</button>
             </div>

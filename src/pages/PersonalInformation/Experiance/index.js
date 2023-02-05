@@ -1,6 +1,9 @@
 import HeadingParrent from "Components/Landing Page/UI/HeadingParrent";
 import style from "./Experiance.module.css";
 import { useRouter } from "next/router";
+import TwinInput from "Components/Landing Page/UI/Twin Inputs/TwinInput";
+import WideInput from "Components/Landing Page/UI/WideInput/WideInput";
+import AdditionalInformationBox from "Components/Landing Page/UI/AdditionalInformationBox/AdditionalInformationBox";
 
 const Experiance = () => {
   const router = useRouter();
@@ -19,67 +22,45 @@ const Experiance = () => {
         <div className={style.ExperianceInfoParrent}>
           <HeadingParrent Text={"გამოცდილება"} Nav={"2/3"} />
           <form className={style.Form}>
-            <div className={style.PositionParrent}>
-              <label className={style.Label} for="position">
-                თანამდებობა
-              </label>
-              <input
-                placeholder="დეველოპერი, დიზაინერ, ა.შ."
-                type="text"
-                id="position"
-                name="position"
-              />
-              <hint className={style.Hint}>მინიმუმ 2 სიმბოლო</hint>
-            </div>
-            <div className={style.EmployerParrent}>
-              <label className={style.Label} for="Employer">
-                დამსაქმებელი
-              </label>
-              <input
-                placeholder="დამსაქმებელი"
-                type="text"
-                id="Employer"
-                name="Employer"
-              />
-              <hint className={style.Hint}>მინიმუმ 2 სიმბოლო</hint>
-            </div>
+            <WideInput
+              placeHolder={"დეველოპერი, დიზაინერ, ა.შ."}
+              name={"position"}
+              id={"position"}
+              type={"text"}
+              label={"თანამდებობა"}
+              hint={"მინიმუმ 2 სიმბოლო"}
+            />
+            <WideInput
+              placeHolder={"დამსაქმებელი"}
+              name={"Employer"}
+              id={"Employer"}
+              type={"text"}
+              label={"დამსაქმებელი"}
+              hint={"მინიმუმ 2 სიმბოლო"}
+            />
             <div className={style.StartAndEndDateParrent}>
-              <div className={style.TwinInputParrents}>
-                <label className={style.Label} for="Employer">
-                  დაწყების რიცხვი
-                </label>
-                <input
-                  placeholder="დამსაქმებელი"
-                  type="date"
-                  id="Employer"
-                  name="Employer"
-                />
-                <hint className={style.Hint}>მინიმუმ 2 სიმბოლო</hint>
-              </div>
-              <div className={style.TwinInputParrents}>
-                <label className={style.Label} for="Employer">
-                  დამთავრების რიცხვი
-                </label>
-                <input
-                  placeholder="დამსაქმებელი"
-                  type="date"
-                  id="Employer"
-                  name="Employer"
-                />
-                <hint className={style.Hint}>მინიმუმ 2 სიმბოლო</hint>
-              </div>
-            </div>
-            <div className={style.DecsriptionParrent}>
-              <label className={style.Label} for="Employer">
-                აღწერა
-              </label>
-              <input
-                placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
-                type="text"
+              <TwinInput
+                type="date"
                 id="Employer"
                 name="Employer"
+                placeHolder={"დამსაქმებელი"}
+                hint={false}
+                label={"დაწყების რიცხვი"}
+              />
+              <TwinInput
+                type="date"
+                id="Employer"
+                name="Employer"
+                placeHolder={"დამსაქმებელი"}
+                hint={false}
+                label={"დამთავრების რიცხვი"}
               />
             </div>
+            <AdditionalInformationBox
+              label={"აღწერა"}
+              placeholder={"როლი თანამდებობაზე და ზოგადი აღწერა"}
+              req={true}
+            />
             <div className={style.Border}></div>
             <button className={style.AdditionalExperiance}>
               მეტი გამოცდლიების დამატება

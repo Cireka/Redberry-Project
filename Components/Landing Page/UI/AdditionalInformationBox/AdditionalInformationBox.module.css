@@ -1,0 +1,26 @@
+.aboutMeParrent > input:focus {
+  outline: none;
+}
+.aboutMeParrent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.aboutMeParrent > label {
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #000000;
+}
+.aboutMeParrent > input {
+  position: relative;
+  width: 100%;
+  padding-top: 1.3rem;
+  padding-bottom: 6.9rem;
+
+  background: #ffffff;
+  border: 1px solid #bcbcbc;
+  border-radius: 0.4rem;
+
+  text-indent: 10px;
+  vertical-align: top;
+}

@@ -1,6 +1,9 @@
 import HeadingParrent from "Components/Landing Page/UI/HeadingParrent";
 import style from "./Education.module.css";
 import { useRouter } from "next/router";
+import TwinInput from "Components/Landing Page/UI/Twin Inputs/TwinInput";
+import WideInput from "Components/Landing Page/UI/WideInput/WideInput";
+import AdditionalInformationBox from "Components/Landing Page/UI/AdditionalInformationBox/AdditionalInformationBox";
 
 const Education = () => {
   const router = useRouter();
@@ -14,56 +17,42 @@ const Education = () => {
         <div className={style.EducationInfoParrent}>
           <HeadingParrent Text={"განათლება"} Nav={"3/3"} />
           <form className={style.Form}>
-            <div className={style.InstituteParrent}>
-              <label className={style.Label} for="position">
-                სასწავლებელი
-              </label>
-              <input
-                placeholder="სასწავლებელი"
-                type="text"
-                id="position"
-                name="position"
-              />
-              <hint className={style.Hint}>მინიმუმ 2 სიმბოლო</hint>
-            </div>
+            <WideInput
+              placeHolder={"სასწავლებელი"}
+              name={"position"}
+              id={"position"}
+              for={"position"}
+              type={"text"}
+              label={"სასწავლებელი"}
+              hint={"მინიმუმ 2 სიმბოლო"}
+            />
+
             <div className={style.StartAndEndDateParrent}>
-              <div className={style.TwinInputParrents}>
-                <label className={style.Label} for="Employer">
-                  ხარისხი
-                </label>
-                <input
-                  placeholder="არჩიეთ ხარისხი"
-                  type="text"
-                  id="Employer"
-                  name="Employer"
-                />
-              </div>
-              <div className={style.TwinInputParrents}>
-                <label className={style.Label} for="Employer">
-                  დამთავრების რიცხვი
-                </label>
-                <input
-                  placeholder="დამსაქმებელი"
-                  type="date"
-                  id="Employer"
-                  name="Employer"
-                />
-              </div>
-            </div>
-            <div className={style.DecsriptionParrent}>
-              <label className={style.Label} for="Employer">
-                აღწერა
-              </label>
-              <input
-                placeholder="განათლების აღწერა"
+              <TwinInput
                 type="text"
                 id="Employer"
                 name="Employer"
+                placeHolder={"არჩიეთ ხარისხი"}
+                hint={false}
+                label={"ხარისხი"}
+              />
+              <TwinInput
+                type="date"
+                id="Employer"
+                name="Employer"
+                placeholder={"დამსაქმებელი"}
+                hint={false}
+                label={"დამთავრების რიცხვი"}
               />
             </div>
+            <AdditionalInformationBox
+              label={"აღწერა"}
+              placeholder={"განათლების აღწერა"}
+              req={true}
+            />
             <div className={style.Border}></div>
             <button className={style.AdditionalExperiance}>
-              მეტი გამოცდლიების დამატება
+              მეტი სასწავლებლის დამატება
             </button>
             <div className={style.NavButtonsParrent}>
               <button onClick={goBackHandler} className={style.NavButtons}>

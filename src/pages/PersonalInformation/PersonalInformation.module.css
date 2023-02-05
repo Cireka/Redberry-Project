@@ -47,16 +47,7 @@
   align-items: center;
   gap: 5.6rem;
 }
-.Label {
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #000000;
-}
-.Hint {
-  font-size: 1.4rem;
-  color: #2e2e2e;
-  font-weight: 300;
-}
+
 .NameInputParrent > input {
   text-indent: 1.6rem;
   width: 371px;
@@ -65,8 +56,7 @@
   border: 1px solid #bcbcbc;
   border-radius: 4px;
 }
-.NameInputParrent > input:focus,
-.aboutMeParrent > input:focus {
+.NameInputParrent > input:focus {
   outline: none;
 }
 
@@ -100,29 +90,7 @@
 .PhotoUploadParrent > button:active {
   background-color: #0d73ac;
 }
-.aboutMeParrent {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-.aboutMeParrent > label {
-  font-weight: 600;
-  font-size: 1.6rem;
-  color: #000000;
-}
-.aboutMeParrent > input {
-  position: relative;
-  width: 79.8rem;
-  padding-top: 1.3rem;
-  padding-bottom: 6.9rem;
 
-  background: #ffffff;
-  border: 1px solid #bcbcbc;
-  border-radius: 0.4rem;
-
-  text-indent: 10px;
-  vertical-align: top;
-}
 .emailParrent > input,
 .mobileParrent > input {
   width: 79.8rem;
