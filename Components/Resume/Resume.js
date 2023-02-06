@@ -34,9 +34,13 @@ const Resume = (props) => {
       {props.education && (
         <div className={style.Heading}>
           <h2>განათლება</h2>
-          <p></p>
-          <span className={style.Date}>23/23/23, 24/24/24</span>
-          <span className={style.Description}></span>
+          <p>
+            {props.education} {props.educationDegree}
+          </p>
+          <h3 className={style.Date}>{props.educationDate}</h3>
+          <span className={style.Description}>
+            {props.educationDescription}
+          </span>
         </div>
       )}
     </div>

@@ -2,7 +2,7 @@ import style from "./TwinInput.module.css";
 const TwinInput = (props) => {
   return (
     <div className={style.TwinInputParrents}>
-      <label className={style.Label} for="Employer">
+      <label className={style.Label} htmlFor="Employer">
         {props.label}
       </label>
       <input

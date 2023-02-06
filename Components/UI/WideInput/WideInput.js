@@ -2,7 +2,7 @@ import style from "./WideInput.module.css";
 const WideInput = (props) => {
   return (
     <div className={style.wideParrent}>
-      <label className={style.Label} for={props.for}>
+      <label className={style.Label} htmlfor={props.for}>
         {props.label}
       </label>
       <input
