@@ -17,20 +17,28 @@ const Resume = (props) => {
           <p>{props.aboutMe}</p>
         </div>
       )}
-      {props.aboutMe && <div className={style.Border}></div>}
-      <div className={style.Heading}>
-        <h2>გამოცდილება</h2>
-        <p>React Native, Javascript</p>
-        <span className={style.Date}>23/23/23, 24/24/24</span>
-        <span className={style.Description}></span>
-      </div>
+      {props.job && <div className={style.Border}></div>}
+      {props.job && (
+        <div className={style.Heading}>
+          <h2>გამოცდილება</h2>
+          <p>
+            {props.job} {props.employer}
+          </p>
+          <h3 className={style.Date}>
+            {props.jobStartDate} - {props.jobEndDate}
+          </h3>
+          <span className={style.Description}>{props.jobDescription}</span>
+        </div>
+      )}
       <div className={style.Border}></div>
-      <div className={style.Heading}>
-        <h2>გამოცდილება</h2>
-        <p>React Native, Javascript</p>
-        <span className={style.Date}>23/23/23, 24/24/24</span>
-        <span className={style.Description}></span>
-      </div>
+      {props.education && (
+        <div className={style.Heading}>
+          <h2>განათლება</h2>
+          <p></p>
+          <span className={style.Date}>23/23/23, 24/24/24</span>
+          <span className={style.Description}></span>
+        </div>
+      )}
     </div>
   );
 };

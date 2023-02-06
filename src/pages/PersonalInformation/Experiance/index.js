@@ -27,7 +27,8 @@ const Experiance = () => {
     number: "",
     job: "",
     employer: "",
-    jobDate: "",
+    jobStartDate: "",
+    jobEndDate: "",
     jobDescription: "",
   });
 
@@ -55,6 +56,17 @@ const Experiance = () => {
     setPersonalData({ ...personalData, employer: event.target.value });
   };
 
+  const startDateHandler = (event) => {
+    setPersonalData({ ...personalData, jobStartDate: event.target.value });
+  };
+
+  const endDateHandler = (event) => {
+    setPersonalData({ ...personalData, jobEndDate: event.target.value });
+  };
+
+  const jobDescriptionHandler = (event) => {
+    setPersonalData({ ...personalData, jobDescription: event.target.value });
+  };
   return (
     <section className={style.ExperianceIformation}>
       <div className={style.ExperianceIformationContainer}>
@@ -83,23 +95,29 @@ const Experiance = () => {
             />
             <div className={style.StartAndEndDateParrent}>
               <TwinInput
+                onChange={startDateHandler}
+                value={personalData.jobStartDate}
                 type="date"
-                id="Employer"
-                name="Employer"
+                id="startDate"
+                name="startDate"
                 placeHolder={"დამსაქმებელი"}
                 hint={false}
                 label={"დაწყების რიცხვი"}
               />
               <TwinInput
+                onChange={endDateHandler}
+                value={personalData.jobEndDate}
                 type="date"
-                id="Employer"
-                name="Employer"
+                id="endDate"
+                name="endDate"
                 placeHolder={"დამსაქმებელი"}
                 hint={false}
                 label={"დამთავრების რიცხვი"}
               />
             </div>
             <AdditionalInformationBox
+              onChange={jobDescriptionHandler}
+              value={personalData.jobDescription}
               label={"აღწერა"}
               placeholder={"როლი თანამდებობაზე და ზოგადი აღწერა"}
               req={true}
@@ -128,6 +146,10 @@ const Experiance = () => {
           lastName={personalData.lastName}
           name={personalData.name}
           job={personalData.job}
+          employer={personalData.employer}
+          jobStartDate={personalData.jobStartDate}
+          jobEndDate={personalData.jobEndDate}
+          jobDescription={personalData.jobDescription}
         />
       </div>
     </section>
