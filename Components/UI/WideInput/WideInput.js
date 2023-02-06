@@ -6,6 +6,8 @@ const WideInput = (props) => {
         {props.label}
       </label>
       <input
+        onChange={props.onChange}
+        value={props.value}
         id={props.id}
         name={props.email}
         placeholder={props.placeHolder}

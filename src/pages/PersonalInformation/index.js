@@ -15,14 +15,21 @@ const PersonalInformation = () => {
     router.push("/PersonalInformation/Experiance");
   };
   const [isLocalStorageAvailable, setIsLocalStorageAvailable] = useState(false);
-  const [personalData, setPersonalData] = useState({ name: "", lastName: "" });
+  const [personalData, setPersonalData] = useState({
+    name: "",
+    lastName: "",
+    aboutMe: "",
+    email: "",
+    number: "",
+    job: "",
+  });
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.localStorage) {
       setIsLocalStorageAvailable(true);
       const storedData = JSON.parse(
         window.localStorage.getItem("personalData")
-      ) || { name: "", lastName: "" };
+      ) || { name: "", lastName: "", aboutMe: "", email: "", number: "" };
       setPersonalData(storedData);
     }
   }, []);
@@ -40,6 +47,22 @@ const PersonalInformation = () => {
   const lastNameChangeHandler = (event) => {
     setPersonalData({ ...personalData, lastName: event.target.value });
   };
+
+  const descriptionChangeHandler = (event) => {
+    setPersonalData({ ...personalData, aboutMe: event.target.value });
+  };
+  const emailChangeHandler = (event) => {
+    setPersonalData({ ...personalData, email: event.target.value });
+  };
+  const numberChangeHandler = (event) => {
+    setPersonalData({ ...personalData, number: event.target.value });
+
+    const georgianRange = /[\u10A0-\u10FF]/;
+    if (georgianRange.test(event.target.value)) {
+      console.log("ქართული");
+    }
+  };
+
   return (
     <section className={style.PersonalInformation}>
       <div className={style.PersonalInformationContainer}>
@@ -77,11 +100,15 @@ const PersonalInformation = () => {
               <button>ატვირთვა</button>
             </div>
             <AdditionalInformationBox
+              onChange={descriptionChangeHandler}
+              value={personalData.aboutMe}
               label={"ჩემს შესახებ"}
               placeholder={"ზოგადი ინფო შენს შესახებ"}
               req={false}
             />
             <WideInput
+              onChange={emailChangeHandler}
+              value={personalData.email}
               placeHolder={"anzor666@redberry.ge"}
               name={"email"}
               id={"email"}
@@ -90,6 +117,8 @@ const PersonalInformation = () => {
               hint={"მინიმუმ 2 ასო, ქართული ასოები"}
             />
             <WideInput
+              onChange={numberChangeHandler}
+              value={personalData.number}
               placeHolder={"+995 551 12 34 56"}
               name={"mobile"}
               id={"mobile"}
@@ -103,6 +132,8 @@ const PersonalInformation = () => {
           </form>
         </div>
         <Resume
+          email={personalData.email}
+          number={personalData.number}
           aboutMe={personalData.aboutMe}
           lastName={personalData.lastName}
           name={personalData.name}

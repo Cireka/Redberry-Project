@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import TwinInput from "Components/UI/Twin Inputs/TwinInput";
 import WideInput from "Components/UI/WideInput/WideInput";
 import AdditionalInformationBox from "Components/UI/AdditionalInformationBox/AdditionalInformationBox";
+import Resume from "Components/Resume/Resume";
+import { useState, useEffect } from "react";
 
 const Experiance = () => {
   const router = useRouter();
@@ -16,6 +18,43 @@ const Experiance = () => {
     router.push("/PersonalInformation/Experiance/Education");
   };
 
+  const [isLocalStorageAvailable, setIsLocalStorageAvailable] = useState(false);
+  const [personalData, setPersonalData] = useState({
+    name: "",
+    lastName: "",
+    aboutMe: "",
+    email: "",
+    number: "",
+    job: "",
+    employer: "",
+    jobDate: "",
+    jobDescription: "",
+  });
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.localStorage) {
+      setIsLocalStorageAvailable(true);
+      const storedData = JSON.parse(
+        window.localStorage.getItem("personalData")
+      ) || { name: "", lastName: "", aboutMe: "", email: "", number: "" };
+      setPersonalData(storedData);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isLocalStorageAvailable) {
+      window.localStorage.setItem("personalData", JSON.stringify(personalData));
+    }
+  }, [isLocalStorageAvailable, personalData]);
+
+  const jobChangeHandler = (event) => {
+    setPersonalData({ ...personalData, job: event.target.value });
+  };
+
+  const employerChangeHandler = (event) => {
+    setPersonalData({ ...personalData, employer: event.target.value });
+  };
+
   return (
     <section className={style.ExperianceIformation}>
       <div className={style.ExperianceIformationContainer}>
@@ -23,6 +62,8 @@ const Experiance = () => {
           <HeadingParrent Text={"გამოცდილება"} Nav={"2/3"} />
           <form className={style.Form}>
             <WideInput
+              onChange={jobChangeHandler}
+              value={personalData.job}
               placeHolder={"დეველოპერი, დიზაინერ, ა.შ."}
               name={"position"}
               id={"position"}
@@ -31,6 +72,8 @@ const Experiance = () => {
               hint={"მინიმუმ 2 სიმბოლო"}
             />
             <WideInput
+              onChange={employerChangeHandler}
+              value={personalData.employer}
               placeHolder={"დამსაქმებელი"}
               name={"Employer"}
               id={"Employer"}
@@ -78,6 +121,14 @@ const Experiance = () => {
             </div>
           </form>
         </div>
+        <Resume
+          email={personalData.email}
+          number={personalData.number}
+          aboutMe={personalData.aboutMe}
+          lastName={personalData.lastName}
+          name={personalData.name}
+          job={personalData.job}
+        />
       </div>
     </section>
   );
