@@ -26,6 +26,7 @@ const Experiance = () => {
     email: "",
     number: "",
     job: "",
+    image: "",
     employer: "",
     jobStartDate: "",
     jobEndDate: "",
@@ -150,6 +151,7 @@ const Experiance = () => {
           jobStartDate={personalData.jobStartDate}
           jobEndDate={personalData.jobEndDate}
           jobDescription={personalData.jobDescription}
+          img={personalData.image}
         />
       </div>
     </section>

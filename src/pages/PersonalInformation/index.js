@@ -22,6 +22,7 @@ const PersonalInformation = () => {
     email: "",
     number: "",
     job: "",
+    image: [],
   });
 
   useEffect(() => {
@@ -29,7 +30,15 @@ const PersonalInformation = () => {
       setIsLocalStorageAvailable(true);
       const storedData = JSON.parse(
         window.localStorage.getItem("personalData")
-      ) || { name: "", lastName: "", aboutMe: "", email: "", number: "" };
+      ) || {
+        name: "",
+        lastName: "",
+        aboutMe: "",
+        email: "",
+        number: "",
+        job: "",
+        image: "",
+      };
       setPersonalData(storedData);
     }
   }, []);
@@ -61,6 +70,15 @@ const PersonalInformation = () => {
     if (georgianRange.test(event.target.value)) {
       console.log("ქართული");
     }
+  };
+
+  const uploadHandler = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPersonalData({ ...personalData, image: reader.result });
+    };
   };
 
   return (
@@ -97,7 +115,13 @@ const PersonalInformation = () => {
             </div>
             <div className={style.PhotoUploadParrent}>
               <p>პირადი ფოტოს ატვირთვა</p>
-              <button>ატვირთვა</button>
+              <input
+                onChange={uploadHandler}
+                id="file"
+                type="file"
+                accept="image/*"
+              />
+              <label htmlFor="file">ატვირთვა</label>
             </div>
             <AdditionalInformationBox
               onChange={descriptionChangeHandler}
@@ -132,6 +156,7 @@ const PersonalInformation = () => {
           </form>
         </div>
         <Resume
+          img={personalData.image}
           email={personalData.email}
           number={personalData.number}
           aboutMe={personalData.aboutMe}

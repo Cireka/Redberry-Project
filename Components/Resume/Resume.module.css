@@ -85,3 +85,12 @@
 
   color: #000000;
 }
+.img {
+  width: 246px;
+  height: 246px;
+  border-radius: 50%;
+}
+.CredantialsAndImgParrent {
+  display: flex;
+  justify-content: space-between;
+}

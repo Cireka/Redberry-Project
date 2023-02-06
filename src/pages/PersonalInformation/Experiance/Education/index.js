@@ -22,6 +22,7 @@ const Education = () => {
     email: "",
     number: "",
     job: "",
+    image: "",
     employer: "",
     jobStartDate: "",
     jobEndDate: "",
@@ -139,6 +140,7 @@ const Education = () => {
           education={personalData.education}
           educationDate={personalData.EducationDate}
           educationDescription={personalData.EducationDescription}
+          img={personalData.image}
         />
       </div>
     </section>
