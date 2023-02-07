@@ -1,4 +1,5 @@
 import style from "./WideInput.module.css";
+import React from "react";
 const WideInput = (props) => {
   return (
     <div className={style.wideParrent}>
@@ -6,6 +7,7 @@ const WideInput = (props) => {
         {props.label}
       </label>
       <input
+        ref={props.ref}
         onChange={props.onChange}
         value={props.value}
         id={props.id}

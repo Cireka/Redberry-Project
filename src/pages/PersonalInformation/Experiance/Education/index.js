@@ -6,6 +6,7 @@ import WideInput from "Components/UI/WideInput/WideInput";
 import AdditionalInformationBox from "Components/UI/AdditionalInformationBox/AdditionalInformationBox";
 import { useState, useEffect } from "react";
 import Resume from "Components/Resume/Resume";
+import OptionsListInput from "Components/UI/OptionsListInput/OptionsListInput";
 
 const Education = () => {
   const router = useRouter();
@@ -85,7 +86,7 @@ const Education = () => {
             />
 
             <div className={style.StartAndEndDateParrent}>
-              <TwinInput
+              <OptionsListInput
                 onChange={educationDegreeChangeHandler}
                 value={personalData.educationDegree}
                 type="text"

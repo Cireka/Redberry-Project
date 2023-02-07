@@ -5,15 +5,18 @@ import { useRouter } from "next/router";
 import TwinInput from "Components/UI/Twin Inputs/TwinInput";
 import WideInput from "Components/UI/WideInput/WideInput";
 import AdditionalInformationBox from "Components/UI/AdditionalInformationBox/AdditionalInformationBox";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Resume from "Components/Resume/Resume";
 
 const PersonalInformation = () => {
   const router = useRouter();
-  const SubmitHandler = (event) => {
-    event.preventDefault();
-    router.push("/PersonalInformation/Experiance");
-  };
+
+  const [validation, setValidation] = useState({
+    name: true,
+    lastName: true,
+    mobileNumer: true,
+    emailAddres: true,
+  });
   const [isLocalStorageAvailable, setIsLocalStorageAvailable] = useState(false);
   const [personalData, setPersonalData] = useState({
     name: "",
@@ -65,11 +68,11 @@ const PersonalInformation = () => {
   };
   const numberChangeHandler = (event) => {
     setPersonalData({ ...personalData, number: event.target.value });
+  };
 
-    const georgianRange = /[\u10A0-\u10FF]/;
-    if (georgianRange.test(event.target.value)) {
-      console.log("ქართული");
-    }
+  const SubmitHandler = (event) => {
+    event.preventDefault();
+    // router.push("/PersonalInformation/Experiance");
   };
 
   const uploadHandler = (event) => {
