@@ -5,17 +5,17 @@ import { useRouter } from "next/router";
 import TwinInput from "Components/UI/Twin Inputs/TwinInput";
 import WideInput from "Components/UI/WideInput/WideInput";
 import AdditionalInformationBox from "Components/UI/AdditionalInformationBox/AdditionalInformationBox";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Resume from "Components/Resume/Resume";
 
 const PersonalInformation = () => {
   const router = useRouter();
 
   const [validation, setValidation] = useState({
-    name: true,
-    lastName: true,
-    mobileNumer: true,
-    emailAddres: true,
+    name: null,
+    lastName: null,
+    mobileNumer: null,
+    emailAddres: null,
   });
   const [isLocalStorageAvailable, setIsLocalStorageAvailable] = useState(false);
   const [personalData, setPersonalData] = useState({
@@ -52,6 +52,11 @@ const PersonalInformation = () => {
     }
   }, [isLocalStorageAvailable, personalData]);
 
+  function isGeorgian(str) {
+    const georgianRange = /^[\u10A0-\u10FF]+$/;
+    return georgianRange.test(str);
+  }
+
   const nameChangeHandler = (event) => {
     setPersonalData({ ...personalData, name: event.target.value });
   };
@@ -69,10 +74,48 @@ const PersonalInformation = () => {
   const numberChangeHandler = (event) => {
     setPersonalData({ ...personalData, number: event.target.value });
   };
+  useEffect(() => {
+    let updatedValidation = { ...validation };
+
+    if (isGeorgian(personalData.name) && personalData.name.length >= 2) {
+      updatedValidation.name = true;
+    } else {
+      updatedValidation.name = false;
+    }
+    if (
+      personalData.lastName.length >= 2 &&
+      isGeorgian(personalData.lastName)
+    ) {
+      updatedValidation.lastName = true;
+    } else {
+      updatedValidation.lastName = false;
+    }
+
+    if (personalData.number.length !== 9) {
+      updatedValidation.mobileNumer = false;
+    } else {
+      updatedValidation.mobileNumer = true;
+    }
+
+    if (personalData.email.endsWith("@redberry.ge")) {
+      updatedValidation.emailAddres = true;
+    } else {
+      updatedValidation.emailAddres = false;
+    }
+    setValidation(updatedValidation);
+  }, [personalData]);
 
   const SubmitHandler = (event) => {
     event.preventDefault();
-    // router.push("/PersonalInformation/Experiance");
+
+    if (
+      validation.name &&
+      validation.lastName &&
+      validation.mobileNumer &&
+      validation.emailAddres
+    ) {
+      router.push("/PersonalInformation/Experiance");
+    }
   };
 
   const uploadHandler = (event) => {
@@ -92,6 +135,7 @@ const PersonalInformation = () => {
           <form onSubmit={SubmitHandler} className={style.Form}>
             <div className={style.NameAndLastNameParrent}>
               <TwinInput
+                style={validation.name}
                 value={personalData.name}
                 onChange={nameChangeHandler}
                 Req={true}
@@ -104,6 +148,7 @@ const PersonalInformation = () => {
                 label={"სახელი"}
               />
               <TwinInput
+                style={validation.lastName}
                 value={personalData.lastName}
                 onChange={lastNameChangeHandler}
                 Req={true}
@@ -134,6 +179,7 @@ const PersonalInformation = () => {
               req={false}
             />
             <WideInput
+              style={validation.emailAddres}
               onChange={emailChangeHandler}
               value={personalData.email}
               placeHolder={"anzor666@redberry.ge"}
@@ -144,6 +190,7 @@ const PersonalInformation = () => {
               hint={"მინიმუმ 2 ასო, ქართული ასოები"}
             />
             <WideInput
+              style={validation.mobileNumer}
               onChange={numberChangeHandler}
               value={personalData.number}
               placeHolder={"+995 551 12 34 56"}

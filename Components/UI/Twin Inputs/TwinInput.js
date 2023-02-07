@@ -7,6 +7,7 @@ const TwinInput = (props) => {
         {props.label}
       </label>
       <input
+        className={props.style === false ? style.ErrorInput : style.Input}
         ref={props.ref}
         value={props.value}
         onChange={props.onChange && props.onChange}
