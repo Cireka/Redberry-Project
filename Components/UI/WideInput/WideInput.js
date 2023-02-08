@@ -1,7 +1,8 @@
 import style from "./WideInput.module.css";
 import React from "react";
 import Image from "next/image";
-import correctVector from "../../../public/Input Icon/Vector.png";
+import correctVector from "../../../public/Input Icons/Vector.png";
+import wrongInputIcon from "../../../public/Input Icons/wrongInput.png";
 
 const WideInput = (props) => {
   return (
@@ -9,12 +10,22 @@ const WideInput = (props) => {
       <label className={style.Label} htmlfor={props.for}>
         {props.label}
       </label>
-      <Image
-        quality={100}
-        className={props.style ? style.CorrectCheck : style.Hidden}
-        alt="Correct Input"
-        src={correctVector}
-      />
+      {props.style && (
+        <Image
+          quality={100}
+          className={style.CorrectCheck}
+          alt="Correct Input"
+          src={correctVector}
+        />
+      )}
+      {!props.style && props.value && (
+        <Image
+          quality={100}
+          className={style.WrongCheck}
+          alt="Correct Input"
+          src={wrongInputIcon}
+        />
+      )}
       <input
         className={
           props.value === ""
