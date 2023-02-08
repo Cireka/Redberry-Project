@@ -103,10 +103,28 @@ const PersonalInformation = () => {
       updatedValidation.emailAddres = false;
     }
     setValidation(updatedValidation);
+    console.log(validation.mobileNumer);
   }, [personalData]);
 
   const SubmitHandler = (event) => {
     event.preventDefault();
+    let updatedValidation = { ...validation };
+
+    if (personalData.name === "") {
+      updatedValidation.name = undefined;
+    }
+    if (personalData.lastName === "") {
+      updatedValidation.lastName = undefined;
+    }
+
+    if (personalData.number === "") {
+      updatedValidation.mobileNumer = undefined;
+    }
+
+    if (personalData.email === "") {
+      updatedValidation.emailAddres = undefined;
+    }
+    setValidation(updatedValidation);
 
     if (
       validation.name &&

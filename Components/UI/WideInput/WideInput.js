@@ -18,20 +18,28 @@ const WideInput = (props) => {
           src={correctVector}
         />
       )}
-      {!props.style && props.value && (
-        <Image
-          quality={100}
-          className={style.WrongCheck}
-          alt="Correct Input"
-          src={wrongInputIcon}
-        />
-      )}
+      <Image
+        quality={100}
+        className={
+          props.value === "" && props.style === undefined
+            ? style.WrongCheck
+            : props.style === true
+            ? style.Hidden
+            : props.style === false && props.value !== ""
+            ? style.WrongCheck
+            : style.Hidden
+        }
+        alt="Wrong Input"
+        src={wrongInputIcon}
+      />
       <input
         className={
-          props.value === ""
-            ? style.Input
-            : props.style
+          props.value === "" && props.style === undefined
+            ? style.ErrorInput
+            : props.style === true
             ? style.CorrectInput
+            : props.style === false && props.value === ""
+            ? style.Input
             : style.ErrorInput
         }
         ref={props.ref}
