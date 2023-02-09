@@ -2,19 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  position: relative;
 }
 
-.Input {
-  padding: 1.6rem;
-  width: 37.1rem;
-  height: 4.8rem;
-  background: #ffffff;
-  border: 1px solid #bcbcbc;
-  border-radius: 4px;
-}
-.Input:focus {
-  outline: none;
-}
 .ErrorInput:focus {
   outline: none;
 }
@@ -36,4 +26,51 @@
   font-size: 1.4rem;
   color: #2e2e2e;
   font-weight: 300;
+}
+
+.Input {
+  padding: 1.6rem;
+  width: 37.1rem;
+  height: 4.8rem;
+  background: #ffffff;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+}
+.Input:focus {
+  outline: none;
+}
+.ErrorInput:focus {
+  outline: none;
+}
+.CorrectCheck {
+  position: absolute;
+  top: 40px;
+  right: 14.75px;
+  width: 18.5px;
+  height: auto;
+}
+.WrongCheck {
+  position: absolute;
+  top: 40px;
+  right: -26.75px;
+  width: 18.5px;
+  height: auto;
+}
+.Hidden {
+  position: absolute;
+  top: 40px;
+  right: -26.75px;
+  width: 18.5px;
+  height: auto;
+  opacity: 0;
+}
+.CorrectInput {
+  padding: 1.6rem;
+  width: 37.1rem;
+  height: 4.8rem;
+  border: 1px solid #98e37e;
+  border-radius: 0.4rem;
+}
+.CorrectInput:focus {
+  outline: none;
 }

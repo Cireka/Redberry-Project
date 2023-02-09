@@ -79,22 +79,32 @@ const PersonalInformation = () => {
 
     if (isGeorgian(personalData.name) && personalData.name.length >= 2) {
       updatedValidation.name = true;
-    } else {
+    } else if (
+      isGeorgian(personalData.name) !== true &&
+      personalData.name.length <= 2 &&
+      personalData.name !== ""
+    ) {
       updatedValidation.name = false;
     }
     if (
-      personalData.lastName.length >= 2 &&
-      isGeorgian(personalData.lastName)
+      isGeorgian(personalData.lastName) &&
+      personalData.lastName.length >= 2
     ) {
       updatedValidation.lastName = true;
-    } else {
+      console.log("w");
+    } else if (
+      isGeorgian(personalData.lastName) !== true &&
+      personalData.lastName.length <= 2 &&
+      personalData.lastName !== ""
+    ) {
+      console.log("e");
       updatedValidation.lastName = false;
     }
 
-    if (personalData.number.length !== 9) {
-      updatedValidation.mobileNumer = false;
-    } else {
+    if (personalData.number.length === 9) {
       updatedValidation.mobileNumer = true;
+    } else {
+      updatedValidation.mobileNumer = false;
     }
 
     if (personalData.email.endsWith("@redberry.ge")) {
@@ -103,7 +113,6 @@ const PersonalInformation = () => {
       updatedValidation.emailAddres = false;
     }
     setValidation(updatedValidation);
-    console.log(validation.mobileNumer);
   }, [personalData]);
 
   const SubmitHandler = (event) => {

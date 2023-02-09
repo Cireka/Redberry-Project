@@ -13,10 +13,12 @@ const Experiance = () => {
     event.preventDefault();
     router.back();
   };
-  const goBackForwardsHandler = (event) => {
-    event.preventDefault();
-    router.push("/PersonalInformation/Experiance/Education");
-  };
+  const [validation, setValidation] = useState({
+    job: null,
+    employer: null,
+    jobStartDate: null,
+    jobEndDate: null,
+  });
 
   const [isLocalStorageAvailable, setIsLocalStorageAvailable] = useState(false);
   const [personalData, setPersonalData] = useState({
@@ -34,11 +36,53 @@ const Experiance = () => {
   });
 
   useEffect(() => {
+    let updatedValidation = { ...validation };
+    console.log(personalData);
+
+    if (personalData.job.length >= 2) {
+      updatedValidation.job = true;
+    } else {
+      updatedValidation.job = false;
+    }
+
+    if (personalData.employer.length >= 2) {
+      updatedValidation.employer = true;
+    } else {
+      updatedValidation.employer = false;
+    }
+
+    if (personalData.jobStartDate !== "") {
+      console.log(personalData.jobStartDate);
+      updatedValidation.jobStartDate = true;
+    } else {
+      updatedValidation.jobStartDate = false;
+    }
+    if (personalData.jobEndDate !== "") {
+      updatedValidation.jobEndDate = true;
+    } else {
+      updatedValidation.jobEndDate = false;
+    }
+    setValidation(updatedValidation);
+  }, [personalData]);
+
+  useEffect(() => {
     if (typeof window !== "undefined" && window.localStorage) {
       setIsLocalStorageAvailable(true);
       const storedData = JSON.parse(
         window.localStorage.getItem("personalData")
-      ) || { name: "", lastName: "", aboutMe: "", email: "", number: "" };
+      ) || {
+        name: "",
+        lastName: "",
+        aboutMe: "",
+        email: "",
+        number: "",
+        job: "",
+        image: "",
+        employer: "",
+        jobStartDate: "",
+        jobEndDate: "",
+        jobDescription: "",
+      };
       setPersonalData(storedData);
     }
   }, []);
@@ -68,13 +112,18 @@ const Experiance = () => {
   const jobDescriptionHandler = (event) => {
     setPersonalData({ ...personalData, jobDescription: event.target.value });
   };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+  };
   return (
     <section className={style.ExperianceIformation}>
       <div className={style.ExperianceIformationContainer}>
         <div className={style.ExperianceInfoParrent}>
           <HeadingParrent Text={"გამოცდილება"} Nav={"2/3"} />
-          <form className={style.Form}>
+          <form onSubmit={submitHandler} className={style.Form}>
             <WideInput
+              style={validation.job}
               onChange={jobChangeHandler}
               value={personalData.job}
               placeHolder={"დეველოპერი, დიზაინერ, ა.შ."}
@@ -85,6 +134,7 @@ const Experiance = () => {
               hint={"მინიმუმ 2 სიმბოლო"}
             />
             <WideInput
+              style={validation.employer}
               onChange={employerChangeHandler}
               value={personalData.employer}
               placeHolder={"დამსაქმებელი"}
@@ -96,9 +146,11 @@ const Experiance = () => {
             />
             <div className={style.StartAndEndDateParrent}>
               <TwinInput
+                style={validation.jobStartDate}
                 onChange={startDateHandler}
                 value={personalData.jobStartDate}
                 type="date"
+                for={"startDate"}
                 id="startDate"
                 name="startDate"
                 placeHolder={"დამსაქმებელი"}
@@ -106,9 +158,11 @@ const Experiance = () => {
                 label={"დაწყების რიცხვი"}
               />
               <TwinInput
+                style={validation.jobEndDate}
                 onChange={endDateHandler}
                 value={personalData.jobEndDate}
                 type="date"
+                for={"endDate"}
                 id="endDate"
                 name="endDate"
                 placeHolder={"დამსაქმებელი"}
@@ -119,9 +173,9 @@ const Experiance = () => {
             <AdditionalInformationBox
               onChange={jobDescriptionHandler}
               value={personalData.jobDescription}
+              req={true}
               label={"აღწერა"}
               placeholder={"როლი თანამდებობაზე და ზოგადი აღწერა"}
-              req={true}
             />
             <div className={style.Border}></div>
             <button className={style.AdditionalExperiance}>
@@ -131,10 +185,7 @@ const Experiance = () => {
               <button onClick={goBackHandler} className={style.NavButtons}>
                 უკან
               </button>
-              <button
-                onClick={goBackForwardsHandler}
-                className={style.NavButtons}
-              >
+              <button type="submit" className={style.NavButtons}>
                 წინ
               </button>
             </div>
