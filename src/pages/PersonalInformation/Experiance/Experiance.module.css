@@ -18,8 +18,7 @@
   flex-direction: column;
   gap: 5.4rem;
 }
-.PositionParrent
-{
+.PositionParrent {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -36,8 +35,7 @@
 .PositionParrent > input:focus {
   outline: none;
 }
-.PositionParrent > label
- {
+.PositionParrent > label {
   font-weight: 600;
   font-size: 1.6rem;
   color: #000000;
@@ -47,8 +45,6 @@
   display: flex;
   justify-content: space-between;
 }
-
-
 
 .AdditionalExperiance {
   border: none;
@@ -88,4 +84,11 @@
   font-size: 1.6rem;
   letter-spacing: 0.08em;
   color: #ffffff;
+}
+.NavButtons:hover {
+  cursor: pointer;
+  background-color: #7949ff;
+}
+.NavButtons:active {
+  background-color: #512faf;
 }

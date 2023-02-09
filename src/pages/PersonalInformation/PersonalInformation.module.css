@@ -127,8 +127,8 @@
 }
 .submitParrent > button:hover {
   cursor: pointer;
-  background-color: #7a53e6;
+  background-color: #7949ff;
 }
 .submitParrent > button:active {
-  background-color: #603acc;
+  background-color: #512faf;
 }

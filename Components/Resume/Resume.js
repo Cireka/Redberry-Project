@@ -39,7 +39,7 @@ const Resume = (props) => {
             {props.job} {props.employer}
           </p>
           <h3 className={style.Date}>
-            {props.jobStartDate} - {props.jobEndDate}
+            {props.jobStartDate} {props.jobStartDate && `-`} {props.jobEndDate}
           </h3>
           <span className={style.Description}>{props.jobDescription}</span>
         </div>

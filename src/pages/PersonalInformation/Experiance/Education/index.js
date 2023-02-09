@@ -15,6 +15,13 @@ const Education = () => {
     router.back();
   };
 
+  const [validation, setValidation] = useState({
+    institute: null,
+    degree: null,
+    finishDate: null,
+    educationDescription: null,
+  });
+
   const [isLocalStorageAvailable, setIsLocalStorageAvailable] = useState(false);
   const [personalData, setPersonalData] = useState({
     name: "",
@@ -23,7 +30,7 @@ const Education = () => {
     email: "",
     number: "",
     job: "",
-    image: "",
+    image: [],
     employer: "",
     jobStartDate: "",
     jobEndDate: "",
@@ -39,7 +46,23 @@ const Education = () => {
       setIsLocalStorageAvailable(true);
       const storedData = JSON.parse(
         window.localStorage.getItem("personalData")
-      ) || { name: "", lastName: "", aboutMe: "", email: "", number: "" };
+      ) || {
+        name: "",
+        lastName: "",
+        aboutMe: "",
+        email: "",
+        number: "",
+        job: "",
+        image: [],
+        employer: "",
+        jobStartDate: "",
+        jobEndDate: "",
+        jobDescription: "",
+        education: "",
+        educationDegree: "",
+        EducationDate: "",
+        EducationDescription: "",
+      };
       setPersonalData(storedData);
     }
   }, []);
@@ -67,26 +90,95 @@ const Education = () => {
     });
   };
 
+  useEffect(() => {
+    if (isLocalStorageAvailable) {
+      window.localStorage.setItem("personalData", JSON.stringify(personalData));
+    }
+  }, [isLocalStorageAvailable, personalData]);
+  console.log(personalData);
+
+  useEffect(() => {
+    let updatedValidation = { ...validation };
+    if (personalData.education.length >= 2) {
+      updatedValidation.institute = true;
+    } else if (
+      personalData.education.length <= 2 &&
+      personalData.education !== ""
+    ) {
+      updatedValidation.institute = false;
+    }
+    if (personalData.educationDegree === "") {
+      updatedValidation.degree = false;
+    } else if (personalData.educationDegree !== "") {
+      updatedValidation.degree = true;
+    }
+    if (personalData.EducationDate !== "") {
+      updatedValidation.finishDate = true;
+    } else if (personalData.EducationDate === "") {
+      updatedValidation.finishDate = false;
+    }
+    if (personalData.EducationDescription !== "") {
+      updatedValidation.educationDescription = true;
+    } else if (personalData.EducationDescription === "") {
+      updatedValidation.educationDescription = false;
+    }
+
+    setValidation(updatedValidation);
+  }, [personalData]);
+
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    let updatedValidation = { ...validation };
+
+    if (personalData.education === "") {
+      updatedValidation.institute = undefined;
+    }
+
+    if (personalData.educationDegree === "") {
+      updatedValidation.degree = undefined;
+    }
+    if (personalData.EducationDate === "") {
+      updatedValidation.finishDate = undefined;
+    }
+
+    if (personalData.EducationDescription === "") {
+      updatedValidation.educationDescription = undefined;
+    }
+
+    setValidation(updatedValidation);
+
+    if (
+      validation.educationDescription &&
+      validation.degree &&
+      validation.finishDate &&
+      validation.institute
+    ) {
+      router.push("/PersonalInformation/Experiance/Education");
+    }
+  };
+  console.log(personalData);
+
   return (
     <section className={style.EducationInformation}>
       <div className={style.EducationIformationContainer}>
         <div className={style.EducationInfoParrent}>
           <HeadingParrent Text={"განათლება"} Nav={"3/3"} />
-          <form className={style.Form}>
+          <form onSubmit={formSubmitHandler} className={style.Form}>
             <WideInput
+              style={validation.institute}
               onChange={educationChangeHandler}
               value={personalData.education}
               placeHolder={"სასწავლებელი"}
-              name={"position"}
-              id={"position"}
-              for={"position"}
+              name={"institute"}
+              id={"institute"}
+              for={"institute"}
               type={"text"}
               label={"სასწავლებელი"}
               hint={"მინიმუმ 2 სიმბოლო"}
             />
-
             <div className={style.StartAndEndDateParrent}>
               <OptionsListInput
+                style={validation.degree}
                 onChange={educationDegreeChangeHandler}
                 value={personalData.educationDegree}
                 type="text"
@@ -97,6 +189,7 @@ const Education = () => {
                 label={"ხარისხი"}
               />
               <TwinInput
+                style={validation.finishDate}
                 onChange={educationEndDateChangeHandler}
                 value={personalData.EducationDate}
                 type="date"
@@ -108,6 +201,7 @@ const Education = () => {
               />
             </div>
             <AdditionalInformationBox
+              style={validation.educationDescription}
               onChange={EducationDescription}
               value={personalData.EducationDescription}
               label={"აღწერა"}

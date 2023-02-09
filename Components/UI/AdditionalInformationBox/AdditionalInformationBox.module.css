@@ -1,4 +1,4 @@
-.aboutMeParrent > input:focus {
+.Input:focus {
   outline: none;
 }
 .aboutMeParrent {
@@ -11,7 +11,7 @@
   font-size: 1.6rem;
   color: #000000;
 }
-.aboutMeParrent > input {
+.Input {
   position: relative;
   width: 100%;
   padding-top: 1.3rem;
@@ -19,6 +19,39 @@
 
   background: #ffffff;
   border: 1px solid #bcbcbc;
+  border-radius: 0.4rem;
+
+  text-indent: 10px;
+  vertical-align: top;
+}
+.CorrectInput {
+  position: relative;
+  width: 100%;
+  padding-top: 1.3rem;
+  padding-bottom: 6.9rem;
+
+  background: #ffffff;
+  border: 1px solid #98e37e;
+  border-radius: 0.4rem;
+
+  text-indent: 10px;
+  vertical-align: top;
+}
+.CorrectInput:focus {
+  outline: none;
+}
+.ErrorInput:focus {
+  outline: none;
+}
+
+.ErrorInput {
+  position: relative;
+  width: 100%;
+  padding-top: 1.3rem;
+  padding-bottom: 6.9rem;
+
+  background: #ffffff;
+  border: 1px solid #ef5050;
   border-radius: 0.4rem;
 
   text-indent: 10px;

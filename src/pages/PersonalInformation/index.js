@@ -26,6 +26,14 @@ const PersonalInformation = () => {
     number: "",
     job: "",
     image: [],
+    employer: "",
+    jobStartDate: "",
+    jobEndDate: "",
+    jobDescription: "",
+    education: "",
+    educationDegree: "",
+    EducationDate: "",
+    EducationDescription: "",
   });
 
   useEffect(() => {
@@ -41,6 +49,10 @@ const PersonalInformation = () => {
         number: "",
         job: "",
         image: "",
+        employer: "",
+        jobStartDate: "",
+        jobEndDate: "",
+        jobDescription: "",
       };
       setPersonalData(storedData);
     }
@@ -91,25 +103,26 @@ const PersonalInformation = () => {
       personalData.lastName.length >= 2
     ) {
       updatedValidation.lastName = true;
-      console.log("w");
     } else if (
       isGeorgian(personalData.lastName) !== true &&
       personalData.lastName.length <= 2 &&
       personalData.lastName !== ""
     ) {
-      console.log("e");
       updatedValidation.lastName = false;
     }
 
     if (personalData.number.length === 9) {
       updatedValidation.mobileNumer = true;
-    } else {
+    } else if (
+      personalData.number.length < 9 ||
+      personalData.number.length > 9
+    ) {
       updatedValidation.mobileNumer = false;
     }
 
     if (personalData.email.endsWith("@redberry.ge")) {
       updatedValidation.emailAddres = true;
-    } else {
+    } else if (personalData.email.endsWith("@redberry.ge") === false) {
       updatedValidation.emailAddres = false;
     }
     setValidation(updatedValidation);

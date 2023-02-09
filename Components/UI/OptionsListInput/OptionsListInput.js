@@ -30,6 +30,15 @@ const OptionsListInput = (props) => {
         {props.label}
       </label>
       <select
+        className={
+          props.style === undefined
+            ? style.ErrorSelect
+            : props.style === true && props.value !== ""
+            ? style.CorrectSelect
+            : props.style === false && props.value !== ""
+            ? style.ErrorSelect
+            : style.Select
+        }
         value={props.value}
         onChange={props.onChange && props.onChange}
         ref={props.ref && props.ref}

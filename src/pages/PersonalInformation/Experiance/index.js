@@ -18,6 +18,7 @@ const Experiance = () => {
     employer: null,
     jobStartDate: null,
     jobEndDate: null,
+    jobDescription: null,
   });
 
   const [isLocalStorageAvailable, setIsLocalStorageAvailable] = useState(false);
@@ -28,42 +29,16 @@ const Experiance = () => {
     email: "",
     number: "",
     job: "",
-    image: "",
+    image: [],
     employer: "",
     jobStartDate: "",
     jobEndDate: "",
     jobDescription: "",
+    education: "",
+    educationDegree: "",
+    EducationDate: "",
+    EducationDescription: "",
   });
-
-  useEffect(() => {
-    let updatedValidation = { ...validation };
-    console.log(personalData);
-
-    if (personalData.job.length >= 2) {
-      updatedValidation.job = true;
-    } else {
-      updatedValidation.job = false;
-    }
-
-    if (personalData.employer.length >= 2) {
-      updatedValidation.employer = true;
-    } else {
-      updatedValidation.employer = false;
-    }
-
-    if (personalData.jobStartDate !== "") {
-      console.log(personalData.jobStartDate);
-      updatedValidation.jobStartDate = true;
-    } else {
-      updatedValidation.jobStartDate = false;
-    }
-    if (personalData.jobEndDate !== "") {
-      updatedValidation.jobEndDate = true;
-    } else {
-      updatedValidation.jobEndDate = false;
-    }
-    setValidation(updatedValidation);
-  }, [personalData]);
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.localStorage) {
@@ -82,16 +57,14 @@ const Experiance = () => {
         jobStartDate: "",
         jobEndDate: "",
         jobDescription: "",
+        education: "",
+        educationDegree: "",
+        EducationDate: "",
+        EducationDescription: "",
       };
       setPersonalData(storedData);
     }
   }, []);
-
-  useEffect(() => {
-    if (isLocalStorageAvailable) {
-      window.localStorage.setItem("personalData", JSON.stringify(personalData));
-    }
-  }, [isLocalStorageAvailable, personalData]);
 
   const jobChangeHandler = (event) => {
     setPersonalData({ ...personalData, job: event.target.value });
@@ -115,7 +88,87 @@ const Experiance = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    let updatedValidation = { ...validation };
+
+    if (personalData.jobDescription === "") {
+      updatedValidation.jobDescription = undefined;
+    }
+
+    if (personalData.job === "") {
+      updatedValidation.job = undefined;
+    }
+    if (personalData.employer === "") {
+      updatedValidation.employer = undefined;
+    }
+
+    if (personalData.jobStartDate === "") {
+      updatedValidation.jobStartDate = undefined;
+    }
+
+    if (personalData.jobEndDate === "") {
+      updatedValidation.jobEndDate = undefined;
+    }
+
+    
+    if (personalData.jobDescription === "") {
+      updatedValidation.jobDescription = undefined;
+    }
+    setValidation(updatedValidation);
+
+    if (
+      validation.job &&
+      validation.employer &&
+      validation.jobStartDate &&
+      validation.jobEndDate &&
+      validation.jobDescription
+    ) {
+      router.push("/PersonalInformation/Experiance/Education");
+    }
   };
+
+  useEffect(() => {
+    if (isLocalStorageAvailable) {
+      window.localStorage.setItem("personalData", JSON.stringify(personalData));
+    }
+  }, [isLocalStorageAvailable, personalData]);
+  console.log(personalData);
+  useEffect(() => {
+    let updatedValidation = { ...validation };
+    if (personalData.job.length >= 2) {
+      updatedValidation.job = true;
+    } else if (personalData.job.length <= 2 && personalData.job !== "") {
+      updatedValidation.job = false;
+    }
+    if (personalData.employer.length >= 2) {
+      updatedValidation.employer = true;
+    } else if (
+      personalData.employer.length <= 2 &&
+      personalData.employer !== ""
+    ) {
+      updatedValidation.employer = false;
+    }
+    if (personalData.jobStartDate !== "") {
+      updatedValidation.jobStartDate = true;
+    } else if (personalData.jobEndDate === "") {
+      updatedValidation.jobEndDate = false;
+    }
+    if (personalData.jobEndDate !== "") {
+      updatedValidation.jobEndDate = true;
+    } else if (personalData.jobEndDate === "") {
+      updatedValidation.jobEndDate = false;
+    }
+
+    if (personalData.jobDescription !== "") {
+      updatedValidation.jobDescription = true;
+    } else if (personalData.jobDescription === "") {
+      updatedValidation.jobDescription = false;
+    }
+
+    setValidation(updatedValidation);
+  }, [personalData]);
+
+  console.log(validation.jobDescription);
+
   return (
     <section className={style.ExperianceIformation}>
       <div className={style.ExperianceIformationContainer}>
@@ -173,6 +226,7 @@ const Experiance = () => {
             <AdditionalInformationBox
               onChange={jobDescriptionHandler}
               value={personalData.jobDescription}
+              style={validation.jobDescription}
               req={true}
               label={"აღწერა"}
               placeholder={"როლი თანამდებობაზე და ზოგადი აღწერა"}
