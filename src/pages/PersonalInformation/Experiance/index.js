@@ -109,7 +109,6 @@ const Experiance = () => {
       updatedValidation.jobEndDate = undefined;
     }
 
-    
     if (personalData.jobDescription === "") {
       updatedValidation.jobDescription = undefined;
     }
@@ -149,18 +148,18 @@ const Experiance = () => {
     }
     if (personalData.jobStartDate !== "") {
       updatedValidation.jobStartDate = true;
-    } else if (personalData.jobEndDate === "") {
-      updatedValidation.jobEndDate = false;
+    } else if (personalData.jobStartDate !== "") {
+      updatedValidation.jobStartDate = false;
     }
     if (personalData.jobEndDate !== "") {
       updatedValidation.jobEndDate = true;
-    } else if (personalData.jobEndDate === "") {
+    } else if (personalData.jobEndDate !== "") {
       updatedValidation.jobEndDate = false;
     }
 
     if (personalData.jobDescription !== "") {
       updatedValidation.jobDescription = true;
-    } else if (personalData.jobDescription === "") {
+    } else if (personalData.jobDescription !== "") {
       updatedValidation.jobDescription = false;
     }
 

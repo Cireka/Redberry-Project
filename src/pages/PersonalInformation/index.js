@@ -7,6 +7,7 @@ import WideInput from "Components/UI/WideInput/WideInput";
 import AdditionalInformationBox from "Components/UI/AdditionalInformationBox/AdditionalInformationBox";
 import { useState, useEffect } from "react";
 import Resume from "Components/Resume/Resume";
+import MobileNumberInput from "Components/UI/MobileNumberINput/MobileNumberInput";
 
 const PersonalInformation = () => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const PersonalInformation = () => {
     lastName: null,
     mobileNumer: null,
     emailAddres: null,
+    aboutMe: null,
   });
   const [isLocalStorageAvailable, setIsLocalStorageAvailable] = useState(false);
   const [personalData, setPersonalData] = useState({
@@ -48,11 +50,15 @@ const PersonalInformation = () => {
         email: "",
         number: "",
         job: "",
-        image: "",
+        image: [],
         employer: "",
         jobStartDate: "",
         jobEndDate: "",
         jobDescription: "",
+        education: "",
+        educationDegree: "",
+        EducationDate: "",
+        EducationDescription: "",
       };
       setPersonalData(storedData);
     }
@@ -111,18 +117,24 @@ const PersonalInformation = () => {
       updatedValidation.lastName = false;
     }
 
-    if (personalData.number.length === 9) {
+    if (
+      personalData.number.length === 14 &&
+      personalData.number.substring(0, 4) === "+995"
+    ) {
       updatedValidation.mobileNumer = true;
     } else if (
-      personalData.number.length < 9 ||
-      personalData.number.length > 9
+      personalData.number.length !== 14 &&
+      personalData.number !== ""
     ) {
       updatedValidation.mobileNumer = false;
     }
 
     if (personalData.email.endsWith("@redberry.ge")) {
       updatedValidation.emailAddres = true;
-    } else if (personalData.email.endsWith("@redberry.ge") === false) {
+    } else if (
+      personalData.email.endsWith("@redberry.ge") !== true &&
+      personalData.email !== ""
+    ) {
       updatedValidation.emailAddres = false;
     }
     setValidation(updatedValidation);
@@ -149,6 +161,7 @@ const PersonalInformation = () => {
     setValidation(updatedValidation);
 
     if (
+      personalData.image.length > 0 &&
       validation.name &&
       validation.lastName &&
       validation.mobileNumer &&
@@ -212,6 +225,7 @@ const PersonalInformation = () => {
               <label htmlFor="file">ატვირთვა</label>
             </div>
             <AdditionalInformationBox
+              style={validation.aboutMe}
               onChange={descriptionChangeHandler}
               value={personalData.aboutMe}
               label={"ჩემს შესახებ"}
@@ -229,7 +243,7 @@ const PersonalInformation = () => {
               label={"ელ.ფოსტა"}
               hint={"მინიმუმ 2 ასო, ქართული ასოები"}
             />
-            <WideInput
+            <MobileNumberInput
               style={validation.mobileNumer}
               onChange={numberChangeHandler}
               value={personalData.number}

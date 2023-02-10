@@ -107,19 +107,28 @@ const Education = () => {
     ) {
       updatedValidation.institute = false;
     }
-    if (personalData.educationDegree === "") {
-      updatedValidation.degree = false;
-    } else if (personalData.educationDegree !== "") {
+    if (personalData.educationDegree !== "") {
       updatedValidation.degree = true;
+    } else if (
+      personalData.educationDegree === "" &&
+      validation.degree !== undefined
+    ) {
+      updatedValidation.degree = false;
     }
     if (personalData.EducationDate !== "") {
       updatedValidation.finishDate = true;
-    } else if (personalData.EducationDate === "") {
+    } else if (
+      personalData.EducationDate === "" &&
+      validation.finishDate !== undefined
+    ) {
       updatedValidation.finishDate = false;
     }
     if (personalData.EducationDescription !== "") {
       updatedValidation.educationDescription = true;
-    } else if (personalData.EducationDescription === "") {
+    } else if (
+      personalData.EducationDescription === "" &&
+      validation.educationDescription !== undefined
+    ) {
       updatedValidation.educationDescription = false;
     }
 

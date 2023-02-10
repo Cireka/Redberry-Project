@@ -3,6 +3,7 @@ import Image from "next/image";
 
 const Resume = (props) => {
   const img = props.img;
+
   return (
     <div>
       <div className={style.CredantialsAndImgParrent}>
@@ -21,7 +22,7 @@ const Resume = (props) => {
             </div>
           )}
         </div>
-        {props.img && (
+        {props.img.length !== 0 && (
           <Image
             className={style.img}
             width={246}
