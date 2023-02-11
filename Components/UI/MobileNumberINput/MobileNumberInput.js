@@ -25,7 +25,6 @@ const MobileNumberInput = (props) => {
         alt="Correct Input"
         src={correctVector}
       />
-
       <Image
         quality={100}
         className={

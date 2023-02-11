@@ -51,7 +51,11 @@ const OptionsListInput = (props) => {
         <option value="">აირჩიეთ ხარისხი</option>
 
         {data.map((i) => {
-          return <option value={i.title}>{i.title}</option>;
+          return (
+            <option id={i.id} value={i.title}>
+              {i.title}
+            </option>
+          );
         })}
       </select>
       {props.hint && (

@@ -37,7 +37,9 @@ const Experiance = () => {
     education: "",
     educationDegree: "",
     EducationDate: "",
+    EducationIndex: "",
     EducationDescription: "",
+    imageToSend: "",
   });
 
   useEffect(() => {
@@ -46,21 +48,23 @@ const Experiance = () => {
       const storedData = JSON.parse(
         window.localStorage.getItem("personalData")
       ) || {
-        name: "",
-        lastName: "",
-        aboutMe: "",
-        email: "",
-        number: "",
-        job: "",
-        image: "",
-        employer: "",
-        jobStartDate: "",
-        jobEndDate: "",
-        jobDescription: "",
-        education: "",
-        educationDegree: "",
-        EducationDate: "",
-        EducationDescription: "",
+    name: "",
+    lastName: "",
+    aboutMe: "",
+    email: "",
+    number: "",
+    job: "",
+    image: [],
+    employer: "",
+    jobStartDate: "",
+    jobEndDate: "",
+    jobDescription: "",
+    education: "",
+    educationDegree: "",
+    EducationDate: "",
+    EducationIndex: "",
+    EducationDescription: "",
+    imageToSend: "",
       };
       setPersonalData(storedData);
     }

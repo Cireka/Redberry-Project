@@ -8,9 +8,11 @@ import AdditionalInformationBox from "Components/UI/AdditionalInformationBox/Add
 import { useState, useEffect } from "react";
 import Resume from "Components/Resume/Resume";
 import MobileNumberInput from "Components/UI/MobileNumberINput/MobileNumberInput";
+import ImageInput from "Components/UI/ImageInput/ImageInput";
+import { useRef } from "react";
 
 const PersonalInformation = () => {
-  const router = useRouter();
+  const router = useRouter(null);
 
   const [validation, setValidation] = useState({
     name: null,
@@ -18,6 +20,7 @@ const PersonalInformation = () => {
     mobileNumer: null,
     emailAddres: null,
     aboutMe: null,
+    image: null,
   });
   const [isLocalStorageAvailable, setIsLocalStorageAvailable] = useState(false);
   const [personalData, setPersonalData] = useState({
@@ -27,7 +30,7 @@ const PersonalInformation = () => {
     email: "",
     number: "",
     job: "",
-    image: [],
+    image: "",
     employer: "",
     jobStartDate: "",
     jobEndDate: "",
@@ -35,6 +38,7 @@ const PersonalInformation = () => {
     education: "",
     educationDegree: "",
     EducationDate: "",
+    EducationIndex: "",
     EducationDescription: "",
   });
 
@@ -50,7 +54,7 @@ const PersonalInformation = () => {
         email: "",
         number: "",
         job: "",
-        image: [],
+        image: "",
         employer: "",
         jobStartDate: "",
         jobEndDate: "",
@@ -58,6 +62,7 @@ const PersonalInformation = () => {
         education: "",
         educationDegree: "",
         EducationDate: "",
+        EducationIndex: "",
         EducationDescription: "",
       };
       setPersonalData(storedData);
@@ -92,6 +97,26 @@ const PersonalInformation = () => {
   const numberChangeHandler = (event) => {
     setPersonalData({ ...personalData, number: event.target.value });
   };
+
+  const uploadHandler = (event) => {
+    let updatedValidation = { ...validation };
+    const file = event.target.files[0];
+    const imageBlob = new Blob([file], { type: file.type });
+    const reader = new FileReader();
+
+    reader.readAsDataURL(imageBlob);
+    reader.onloadend = () => {
+      setPersonalData({ ...personalData, image: reader.result });
+    };
+
+    if (updatedValidation.image === false) {
+      updatedValidation.image = true;
+    }
+    setValidation(updatedValidation);
+  };
+
+  // setPersonalData({ ...personalData, imageToSend: event.target.files[0] });
+
   useEffect(() => {
     let updatedValidation = { ...validation };
 
@@ -158,6 +183,9 @@ const PersonalInformation = () => {
     if (personalData.email === "") {
       updatedValidation.emailAddres = undefined;
     }
+    if (personalData.image.length === 0) {
+      updatedValidation.image = false;
+    }
     setValidation(updatedValidation);
 
     if (
@@ -169,15 +197,6 @@ const PersonalInformation = () => {
     ) {
       router.push("/PersonalInformation/Experiance");
     }
-  };
-
-  const uploadHandler = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPersonalData({ ...personalData, image: reader.result });
-    };
   };
 
   return (
@@ -214,16 +233,10 @@ const PersonalInformation = () => {
                 label={"გვარი"}
               />
             </div>
-            <div className={style.PhotoUploadParrent}>
-              <p>პირადი ფოტოს ატვირთვა</p>
-              <input
-                onChange={uploadHandler}
-                id="file"
-                type="file"
-                accept="image/*"
-              />
-              <label htmlFor="file">ატვირთვა</label>
-            </div>
+            <ImageInput
+              uploadHandler={uploadHandler}
+              style={validation.image}
+            />
             <AdditionalInformationBox
               style={validation.aboutMe}
               onChange={descriptionChangeHandler}

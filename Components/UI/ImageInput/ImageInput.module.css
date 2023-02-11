@@ -1,0 +1,38 @@
+.PhotoUploadParrent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.9rem;
+}
+.PhotoUploadParrent > p {
+  font-weight: 500;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+  color: #1a1a1a;
+}
+.PhotoUploadParrent > input {
+  display: none;
+}
+
+.PhotoUploadParrent > label {
+  border: none;
+  width: 10.7rem;
+  height: 2.7rem;
+  background: #0e80bf;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #ffffff;
+}
+
+.PhotoUploadParrent > button:hover {
+  cursor: pointer;
+  background-color: #268dc5;
+}
+.PhotoUploadParrent > button:active {
+  background-color: #0d73ac;
+}

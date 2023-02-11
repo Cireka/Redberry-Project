@@ -7,6 +7,8 @@ import AdditionalInformationBox from "Components/UI/AdditionalInformationBox/Add
 import { useState, useEffect } from "react";
 import Resume from "Components/Resume/Resume";
 import OptionsListInput from "Components/UI/OptionsListInput/OptionsListInput";
+import axios from "axios";
+import { saveAs } from "file-saver";
 
 const Education = () => {
   const router = useRouter();
@@ -38,7 +40,9 @@ const Education = () => {
     education: "",
     educationDegree: "",
     EducationDate: "",
+    EducationIndex: "",
     EducationDescription: "",
+    imageToSend: "",
   });
 
   useEffect(() => {
@@ -61,7 +65,9 @@ const Education = () => {
         education: "",
         educationDegree: "",
         EducationDate: "",
+        EducationIndex: "",
         EducationDescription: "",
+        imageToSend: "",
       };
       setPersonalData(storedData);
     }
@@ -77,7 +83,11 @@ const Education = () => {
     setPersonalData({ ...personalData, education: event.target.value });
   };
   const educationDegreeChangeHandler = (event) => {
-    setPersonalData({ ...personalData, educationDegree: event.target.value });
+    setPersonalData({
+      ...personalData,
+      educationDegree: event.target.value,
+      EducationIndex: event.target.selectedOptions[0].id,
+    });
   };
   const educationEndDateChangeHandler = (event) => {
     setPersonalData({ ...personalData, EducationDate: event.target.value });
@@ -95,7 +105,6 @@ const Education = () => {
       window.localStorage.setItem("personalData", JSON.stringify(personalData));
     }
   }, [isLocalStorageAvailable, personalData]);
-  console.log(personalData);
 
   useEffect(() => {
     let updatedValidation = { ...validation };
@@ -162,10 +171,60 @@ const Education = () => {
       validation.finishDate &&
       validation.institute
     ) {
-      router.push("/PersonalInformation/Experiance/Education");
+      const storedData = JSON.parse(
+        window.localStorage.getItem("personalData")
+      );
+      const image = storedData.image;
+      const base64Image = image;
+      const type = base64Image.split(";")[0].split(":")[1];
+      const binaryData = Buffer.from(base64Image.split(",")[1], "base64");
+      const imageBlob = new Blob([binaryData], { type });
+      const imageFile = new File([imageBlob], "profile photo", {
+        type: "image/png",
+      });
+      let formData = new FormData();
+      formData.append("image", imageFile, "image.png");
+      console.log(imageFile);
+
+      let data = {
+        name: personalData.name,
+        surname: personalData.lastName,
+        email: personalData.email,
+        phone_number: "+995456789101",
+        experiences: [
+          {
+            position: personalData.job,
+            employer: personalData.employer,
+            start_date: personalData.jobStartDate,
+            due_date: personalData.jobEndDate,
+            description: personalData.jobDescription,
+          },
+        ],
+        educations: [
+          {
+            institute: personalData.education,
+            degree_id: personalData.EducationIndex,
+            due_date: personalData.EducationDate,
+            description: personalData.EducationDescription,
+          },
+        ],
+        image: imageFile,
+        about_me: personalData.aboutMe,
+      };
+      // https://httpbin.org/post
+      //https://resume.redberryinternship.ge/api/cvs
+      axios
+        .post("https://resume.redberryinternship.ge/api/cvs", data, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   };
-  console.log(personalData);
 
   return (
     <section className={style.EducationInformation}>
@@ -225,7 +284,9 @@ const Education = () => {
               <button onClick={goBackHandler} className={style.NavButtons}>
                 უკან
               </button>
-              <button className={style.NavButtons}>დასრულება</button>
+              <button type="submit" className={style.NavButtons}>
+                დასრულება
+              </button>
             </div>
           </form>
         </div>
