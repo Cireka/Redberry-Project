@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 import Resume from "Components/Resume/Resume";
 import OptionsListInput from "Components/UI/OptionsListInput/OptionsListInput";
 import axios from "axios";
-import { saveAs } from "file-saver";
 
 const Education = () => {
   const router = useRouter();
@@ -18,11 +17,13 @@ const Education = () => {
   };
 
   const [validation, setValidation] = useState({
-    institute: null,
-    degree: null,
-    finishDate: null,
-    educationDescription: null,
+    institute0: null,
+    degree0: null,
+    finishDate0: null,
+    educationDescription0: null,
   });
+
+  const [inputSets, setInputSets] = useState(0);
 
   const [isLocalStorageAvailable, setIsLocalStorageAvailable] = useState(false);
   const [personalData, setPersonalData] = useState({
@@ -31,20 +32,13 @@ const Education = () => {
     aboutMe: "",
     email: "",
     number: "",
-    job: "",
+    job: [{}],
     image: [],
     employer: "",
-    jobStartDate: "",
-    jobEndDate: "",
-    jobDescription: "",
-    education: "",
-    educationDegree: "",
-    EducationDate: "",
-    EducationIndex: "",
-    EducationDescription: "",
+    education: [{}],
     imageToSend: "",
-    experianceCount: 1,
-    educationCount: 1,
+    experianceCount: 0,
+    educationCount: 0,
   });
 
   useEffect(() => {
@@ -58,17 +52,10 @@ const Education = () => {
         aboutMe: "",
         email: "",
         number: "",
-        job: "",
+        job: [{}],
         image: [],
         employer: "",
-        jobStartDate: "",
-        jobEndDate: "",
-        jobDescription: "",
-        education: "",
-        educationDegree: "",
-        EducationDate: "",
-        EducationIndex: "",
-        EducationDescription: "",
+        education: [{}],
         imageToSend: "",
         experianceCount: 1,
         educationCount: 1,
@@ -83,25 +70,52 @@ const Education = () => {
     }
   }, [isLocalStorageAvailable, personalData]);
 
-  const educationChangeHandler = (event) => {
-    setPersonalData({ ...personalData, education: event.target.value });
-  };
-  const educationDegreeChangeHandler = (event) => {
-    setPersonalData({
-      ...personalData,
-      educationDegree: event.target.value,
-      EducationIndex: event.target.selectedOptions[0].id,
-    });
-  };
-  const educationEndDateChangeHandler = (event) => {
-    setPersonalData({ ...personalData, EducationDate: event.target.value });
+  const educationDescriptionHandler = (index) => (event) => {
+    const updatedEducation = {
+      ...personalData.education[index],
+      educationDescription: event.target.value,
+    };
+    const updatedValue = [...personalData.education];
+    updatedValue[index] = updatedEducation;
+
+    setPersonalData({ ...personalData, education: updatedValue });
+    setInputSets(index);
   };
 
-  const EducationDescription = (event) => {
-    setPersonalData({
-      ...personalData,
-      EducationDescription: event.target.value,
-    });
+  const educationDegreeHandler = (index) => (event) => {
+    const selectedOptionId =
+      event.target.options[event.target.selectedIndex].id;
+    const updatedEducation = {
+      ...personalData.education[index],
+      educationDegree: event.target.value,
+      educationId: Number(selectedOptionId),
+    };
+    const updatedValue = [...personalData.education];
+    updatedValue[index] = updatedEducation;
+    setPersonalData({ ...personalData, education: updatedValue });
+    setInputSets(index);
+  };
+
+  const educationInstituteHandler = (index) => (event) => {
+    const updatedEducation = {
+      ...personalData.education[index],
+      educationInstitute: event.target.value,
+    };
+    const updatedValue = [...personalData.education];
+    updatedValue[index] = updatedEducation;
+    setPersonalData({ ...personalData, education: updatedValue });
+    setInputSets(index);
+  };
+
+  const educationEndDateHandler = (index) => (event) => {
+    const updatedEducation = {
+      ...personalData.education[index],
+      educationEndDate: event.target.value,
+    };
+    const updatedValue = [...personalData.education];
+    updatedValue[index] = updatedEducation;
+    setPersonalData({ ...personalData, education: updatedValue });
+    setInputSets(index);
   };
 
   useEffect(() => {
@@ -112,118 +126,171 @@ const Education = () => {
 
   useEffect(() => {
     let updatedValidation = { ...validation };
-    if (personalData.education.length >= 2) {
-      updatedValidation.institute = true;
-    } else if (
-      personalData.education.length <= 2 &&
-      personalData.education !== ""
-    ) {
-      updatedValidation.institute = false;
-    }
-    if (personalData.educationDegree !== "") {
-      updatedValidation.degree = true;
-    } else if (
-      personalData.educationDegree === "" &&
-      validation.degree !== undefined
-    ) {
-      updatedValidation.degree = false;
-    }
-    if (personalData.EducationDate !== "") {
-      updatedValidation.finishDate = true;
-    } else if (
-      personalData.EducationDate === "" &&
-      validation.finishDate !== undefined
-    ) {
-      updatedValidation.finishDate = false;
-    }
-    if (personalData.EducationDescription !== "") {
-      updatedValidation.educationDescription = true;
-    } else if (
-      personalData.EducationDescription === "" &&
-      validation.educationDescription !== undefined
-    ) {
-      updatedValidation.educationDescription = false;
+
+    if (Array.isArray(personalData.education)) {
+      personalData.education.forEach((education, index) => {
+        if (education.educationDegree?.length >= 2) {
+          updatedValidation[`degree${index}`] = true;
+        } else if (
+          education.educationDegree?.length <= 2 &&
+          education.educationDegree !== ""
+        ) {
+          updatedValidation[`degree${index}`] = false;
+        }
+
+        if (education.educationInstitute?.length >= 2) {
+          updatedValidation[`institute${index}`] = true;
+        } else if (
+          education.educationInstitute?.length <= 2 &&
+          education.educationInstitute !== ""
+        ) {
+          updatedValidation[`institute${index}`] = false;
+        }
+        if (education.educationEndDate?.length > 1) {
+          updatedValidation[`finishDate${index}`] = true;
+        } else if (education.educationEndDate?.length < 1) {
+          updatedValidation[`finishDate${index}`] = false;
+        }
+        if (education.educationDescription?.length > 1) {
+          updatedValidation[`educationDescription${index}`] = true;
+        } else if (education.educationDescription?.length < 1) {
+          updatedValidation[`educationDescription${index}`] = false;
+        }
+      });
     }
 
     setValidation(updatedValidation);
   }, [personalData]);
 
+  const handleClick = (event) => {
+    event.preventDefault();
+    setInputSets((prevInputSets) => {
+      let updatedValidation = Object.assign({}, validation, {
+        [`institute${prevInputSets + 1}`]: null,
+        [`degree${prevInputSets + 1}`]: null,
+        [`finishDate${prevInputSets + 1}`]: null,
+        [`educationDescription${prevInputSets + 1}`]: null,
+      });
+      let updatedPersonalData = {
+        ...personalData,
+        education: [
+          ...personalData.education,
+          {
+            educationDegree: "",
+            educationDescription: "",
+            educationEndDate: "",
+            educationInstitute: "",
+          },
+        ],
+        experianceCount: personalData.experianceCount + 1,
+      };
+      setValidation(updatedValidation);
+      setPersonalData(updatedPersonalData);
+
+      return prevInputSets + 1;
+    });
+  };
+
   const formSubmitHandler = (event) => {
     event.preventDefault();
     let updatedValidation = { ...validation };
 
-    if (personalData.education === "") {
-      updatedValidation.institute = undefined;
-    }
+    personalData.education.forEach((education, index) => {
+      if (!education.educationDegree) {
+        updatedValidation[`degree${index}`] = undefined;
+      }
 
-    if (personalData.educationDegree === "") {
-      updatedValidation.degree = undefined;
-    }
-    if (personalData.EducationDate === "") {
-      updatedValidation.finishDate = undefined;
-    }
+      if (!education.educationDescription) {
+        updatedValidation[`educationDescription${index}`] = undefined;
+      }
+      if (!education.educationEndDate) {
+        updatedValidation[`finishDate${index}`] = undefined;
+      }
 
-    if (personalData.EducationDescription === "") {
-      updatedValidation.educationDescription = undefined;
-    }
+      if (!education.educationInstitute) {
+        updatedValidation[`institute${index}`] = undefined;
+      }
+    });
 
     setValidation(updatedValidation);
-
-    if (
-      validation.educationDescription &&
-      validation.degree &&
-      validation.finishDate &&
-      validation.institute
-    ) {
-      const storedData = JSON.parse(
-        window.localStorage.getItem("personalData")
-      );
-      const image = storedData.image;
-      const base64Image = image;
-      const type = base64Image.split(";")[0].split(":")[1];
-      const binaryData = Buffer.from(base64Image.split(",")[1], "base64");
-      const imageBlob = new Blob([binaryData], { type });
-      const imageFile = new File([imageBlob], "profile photo", {
-        type: "image/png",
+    if (Array.isArray(personalData.education)) {
+      let allValid = true;
+      personalData.education.forEach((job, index) => {
+        if (
+          !job.educationDegree ||
+          !job.educationDescription ||
+          !job.educationEndDate ||
+          !job.educationInstitute
+        ) {
+          allValid = false;
+        }
       });
+      if (allValid) {
+        {
+          const storedData = JSON.parse(
+            window.localStorage.getItem("personalData")
+          );
+          const image = storedData.image;
+          const base64Image = image;
+          const type = base64Image.split(";")[0].split(":")[1];
+          const binaryData = Buffer.from(base64Image.split(",")[1], "base64");
+          const imageBlob = new Blob([binaryData], { type });
+          const imageFile = new File([imageBlob], "profile photo", {
+            type: "image/png",
+          });
 
-      let data = {
-        name: personalData.name,
-        surname: personalData.lastName,
-        email: personalData.email,
-        phone_number: "+995456789101",
-        experiences: [
-          {
-            position: personalData.job,
-            employer: personalData.employer,
-            start_date: personalData.jobStartDate,
-            due_date: personalData.jobEndDate,
-            description: personalData.jobDescription,
-          },
-        ],
-        educations: [
-          {
-            institute: personalData.education,
-            degree_id: personalData.EducationIndex,
-            due_date: personalData.EducationDate,
-            description: personalData.EducationDescription,
-          },
-        ],
-        image: imageFile,
-        about_me: personalData.aboutMe,
-      };
-      // https://httpbin.org/post
-      //https://resume.redberryinternship.ge/api/cvs
-      axios
-        .post("https://resume.redberryinternship.ge/api/cvs", data, {
-          headers: { "Content-Type": "multipart/form-data" },
-        })
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+          console.log(personalData.education);
+
+          let data = {
+            name: personalData.name,
+            surname: personalData.lastName,
+            email: personalData.email,
+            phone_number: "+995456789101",
+            experiences: [],
+            educations: [],
+            image: imageFile,
+            about_me: personalData.aboutMe,
+          };
+
+          if (personalData.job) {
+            personalData.job.forEach((job) => {
+              data.experiences.push({
+                position: job.jobPosition,
+                employer: job.employer,
+                start_date: job.jobStartDate,
+                due_date: job.jobEndDate,
+                description: job.jobDescription,
+              });
+            });
+          }
+
+          if (personalData.education) {
+            personalData.education.forEach((education) => {
+              data.educations.push({
+                institute: education.educationInstitute,
+                degree_id: education.educationId,
+                due_date: education.educationEndDate,
+                description: education.educationDescription,
+              });
+            });
+          }
+
+          // ინდექსი უნდა შევინახოთ
+
+          // https://httpbin.org/post
+          //https://resume.redberryinternship.ge/api/cvs
+          axios
+            .post("https://resume.redberryinternship.ge/api/cvs", data, {
+              headers: { "Content-Type": "multipart/form-data" },
+            })
+            .then((res) => {
+              console.log(res.data);
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+      }
     }
   };
 
@@ -233,52 +300,61 @@ const Education = () => {
         <div className={style.EducationInfoParrent}>
           <HeadingParrent Text={"განათლება"} Nav={"3/3"} />
           <form onSubmit={formSubmitHandler} className={style.Form}>
-            <WideInput
-              style={validation.institute}
-              onChange={educationChangeHandler}
-              value={personalData.education}
-              placeHolder={"სასწავლებელი"}
-              name={"institute"}
-              id={"institute"}
-              for={"institute"}
-              type={"text"}
-              label={"სასწავლებელი"}
-              hint={"მინიმუმ 2 სიმბოლო"}
-            />
-            <div className={style.StartAndEndDateParrent}>
-              <OptionsListInput
-                style={validation.degree}
-                onChange={educationDegreeChangeHandler}
-                value={personalData.educationDegree}
-                type="text"
-                id="Degree"
-                name="Degree"
-                placeHolder={"არჩიეთ ხარისხი"}
-                hint={false}
-                label={"ხარისხი"}
-              />
-              <TwinInput
-                style={validation.finishDate}
-                onChange={educationEndDateChangeHandler}
-                value={personalData.EducationDate}
-                type="date"
-                id="EducationEndDate"
-                name="EducationEndDate"
-                placeholder={"დამსაქმებელი"}
-                hint={false}
-                label={"დამთავრების რიცხვი"}
-              />
-            </div>
-            <AdditionalInformationBox
-              style={validation.educationDescription}
-              onChange={EducationDescription}
-              value={personalData.EducationDescription}
-              label={"აღწერა"}
-              placeholder={"განათლების აღწერა"}
-              req={true}
-            />
-            <div className={style.Border}></div>
-            <button className={style.AdditionalExperiance}>
+            {Array(personalData.educationCount)
+              .fill()
+              .map((_, i) => (
+                <div className={style.Form} key={i}>
+                  <WideInput
+                    style={validation[`institute${i}`]}
+                    onChange={educationInstituteHandler(i)}
+                    value={personalData.education[i]?.educationInstitute}
+                    placeHolder={"სასწავლებელი"}
+                    name={"institute"}
+                    id={"institute"}
+                    for={"institute"}
+                    type={"text"}
+                    label={"სასწავლებელი"}
+                    hint={"მინიმუმ 2 სიმბოლო"}
+                  />
+                  <div className={style.StartAndEndDateParrent}>
+                    <OptionsListInput
+                      style={validation[`degree${i}`]}
+                      onChange={educationDegreeHandler(i)}
+                      value={personalData.education[i]?.educationDegree}
+                      type="text"
+                      id="Degree"
+                      name="Degree"
+                      placeHolder={"არჩიეთ ხარისხი"}
+                      hint={false}
+                      label={"ხარისხი"}
+                    />
+                    <TwinInput
+                      style={validation[`finishDate${i}`]}
+                      onChange={educationEndDateHandler(i)}
+                      value={personalData.education[i]?.educationEndDate}
+                      type="date"
+                      id="EducationEndDate"
+                      name="EducationEndDate"
+                      placeholder={"დამსაქმებელი"}
+                      hint={false}
+                      label={"დამთავრების რიცხვი"}
+                    />
+                  </div>
+                  <AdditionalInformationBox
+                    style={validation[`educationDescription${i}`]}
+                    onChange={educationDescriptionHandler(i)}
+                    value={personalData.education[i]?.educationDescription}
+                    label={"აღწერა"}
+                    placeholder={"განათლების აღწერა"}
+                    req={true}
+                  />
+                  <div className={style.Border}></div>
+                </div>
+              ))}
+            <button
+              onClick={handleClick}
+              className={style.AdditionalExperiance}
+            >
               მეტი სასწავლებლის დამატება
             </button>
             <div className={style.NavButtonsParrent}>
@@ -297,16 +373,13 @@ const Education = () => {
           aboutMe={personalData.aboutMe}
           lastName={personalData.lastName}
           name={personalData.name}
-          job={personalData.job}
-          employer={personalData.employer}
-          jobStartDate={personalData.jobStartDate}
-          jobEndDate={personalData.jobEndDate}
-          jobDescription={personalData.jobDescription}
-          educationDegree={personalData.educationDegree}
+          experiance={personalData.job}
           education={personalData.education}
-          educationDate={personalData.EducationDate}
-          educationDescription={personalData.EducationDescription}
           img={personalData.image}
+          // educationDegree={personalData.educationDegree}
+          // education={personalData.education}
+          // educationDate={personalData.EducationDate}
+          // educationDescription={personalData.EducationDescription}
         />
       </div>
     </section>

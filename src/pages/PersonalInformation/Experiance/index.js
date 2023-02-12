@@ -135,38 +135,46 @@ const Experiance = () => {
     event.preventDefault();
     let updatedValidation = { ...validation };
 
-    if (personalData.jobDescription === "") {
-      updatedValidation.jobDescription = undefined;
-    }
+    personalData.job.forEach((job, index) => {
+      if (!job.jobDescription) {
+        updatedValidation[`jobDescription${index}`] = undefined;
+      }
 
-    if (personalData.job === "") {
-      updatedValidation.job = undefined;
-    }
-    if (personalData.employer === "") {
-      updatedValidation.employer = undefined;
-    }
+      if (!job.jobPosition) {
+        updatedValidation[`job${index}`] = undefined;
+      }
+      if (!job.employer) {
+        updatedValidation[`employer${index}`] = undefined;
+      }
 
-    if (personalData.jobStartDate === "") {
-      updatedValidation.jobStartDate = undefined;
-    }
+      if (!job.jobStartDate) {
+        updatedValidation[`jobStartDate${index}`] = undefined;
+      }
 
-    if (personalData.jobEndDate === "") {
-      updatedValidation.jobEndDate = undefined;
-    }
+      if (!job.jobEndDate) {
+        updatedValidation[`jobEndDate${index}`] = undefined;
+      }
+    });
 
-    if (personalData.jobDescription === "") {
-      updatedValidation.jobDescription = undefined;
-    }
     setValidation(updatedValidation);
 
-    if (
-      validation.job &&
-      validation.employer &&
-      validation.jobStartDate &&
-      validation.jobEndDate &&
-      validation.jobDescription
-    ) {
-      router.push("/PersonalInformation/Experiance/Education");
+    event.preventDefault();
+    if (Array.isArray(personalData.job)) {
+      let allValid = true;
+      personalData.job.forEach((job, index) => {
+        if (
+          !job.jobPosition ||
+          !job.employer ||
+          !job.jobStartDate ||
+          !job.jobEndDate ||
+          !job.jobDescription
+        ) {
+          allValid = false;
+        }
+      });
+      if (allValid) {
+        router.push("/PersonalInformation/Experiance/Education");
+      }
     }
   };
   console.log(personalData.experianceCount);
@@ -180,35 +188,37 @@ const Experiance = () => {
   useEffect(() => {
     let updatedValidation = { ...validation };
 
-    personalData.job.forEach((job, index) => {
-      if (job.jobPosition?.length >= 2) {
-        updatedValidation[`job${index}`] = true;
-      } else if (job.jobPosition?.length <= 2 && job.jobPosition !== "") {
-        updatedValidation[`job${index}`] = false;
-      }
+    if (Array.isArray(personalData.job)) {
+      personalData.job.forEach((job, index) => {
+        if (job.jobPosition?.length >= 2) {
+          updatedValidation[`job${index}`] = true;
+        } else if (job.jobPosition?.length <= 2 && job.jobPosition !== "") {
+          updatedValidation[`job${index}`] = false;
+        }
 
-      if (job.employer?.length >= 2) {
-        updatedValidation[`employer${index}`] = true;
-      } else if (job.employer?.length <= 2 && job.employer !== "") {
-        updatedValidation[`employer${index}`] = false;
-      }
-      if (job.jobStartDate?.length > 1) {
-        updatedValidation[`jobStartDate${index}`] = true;
-      } else if (job.jobStartDate?.length < 1) {
-        updatedValidation[`jobStartDate${index}`] = false;
-      }
-      if (job.jobEndDate?.length > 1) {
-        updatedValidation[`jobEndDate${index}`] = true;
-      } else if (job.jobEndDate?.length < 1) {
-        updatedValidation[`jobEndDate${index}`] = false;
-      }
+        if (job.employer?.length >= 2) {
+          updatedValidation[`employer${index}`] = true;
+        } else if (job.employer?.length <= 2 && job.employer !== "") {
+          updatedValidation[`employer${index}`] = false;
+        }
+        if (job.jobStartDate?.length > 1) {
+          updatedValidation[`jobStartDate${index}`] = true;
+        } else if (job.jobStartDate?.length < 1) {
+          updatedValidation[`jobStartDate${index}`] = false;
+        }
+        if (job.jobEndDate?.length > 1) {
+          updatedValidation[`jobEndDate${index}`] = true;
+        } else if (job.jobEndDate?.length < 1) {
+          updatedValidation[`jobEndDate${index}`] = false;
+        }
 
-      if (job.jobDescription?.length > 1) {
-        updatedValidation[`jobDescription${index}`] = true;
-      } else if (job.jobDescription?.length < 1) {
-        updatedValidation[`jobDescription${index}`] = false;
-      }
-    });
+        if (job.jobDescription?.length > 1) {
+          updatedValidation[`jobDescription${index}`] = true;
+        } else if (job.jobDescription?.length < 1) {
+          updatedValidation[`jobDescription${index}`] = false;
+        }
+      });
+    }
 
     setValidation(updatedValidation);
   }, [personalData]);
@@ -257,7 +267,7 @@ const Experiance = () => {
                   <WideInput
                     style={validation[`job${i}`]}
                     onChange={jobChangeHandler(i)}
-                    value={personalData.job[i].jobPosition}
+                    value={personalData.job[i]?.jobPosition}
                     placeHolder={"დეველოპერი, დიზაინერ, ა.შ."}
                     name={"position"}
                     id={"position"}
@@ -268,7 +278,7 @@ const Experiance = () => {
                   <WideInput
                     style={validation[`employer${i}`]}
                     onChange={employerChangeHandler(i)}
-                    value={personalData.job[i].employer}
+                    value={personalData.job[i]?.employer}
                     placeHolder={"დამსაქმებელი"}
                     name={"Employer"}
                     id={"Employer"}
@@ -280,7 +290,7 @@ const Experiance = () => {
                     <TwinInput
                       style={validation[`jobStartDate${i}`]}
                       onChange={startDateHandler(i)}
-                      value={personalData.job[i].jobStartDate}
+                      value={personalData.job[i]?.jobStartDate}
                       type="date"
                       for={"startDate"}
                       id="startDate"
@@ -292,7 +302,7 @@ const Experiance = () => {
                     <TwinInput
                       style={validation[`jobEndDate${i}`]}
                       onChange={endDateHandler(i)}
-                      value={personalData.job[i].jobEndDate}
+                      value={personalData.job[i]?.jobEndDate}
                       type="date"
                       for={"endDate"}
                       id="endDate"
@@ -304,7 +314,7 @@ const Experiance = () => {
                   </div>
                   <AdditionalInformationBox
                     onChange={jobDescriptionHandler(i)}
-                    value={personalData.job[i].jobDescription}
+                    value={personalData.job[i]?.jobDescription}
                     style={validation[`jobDescription${i}`]}
                     req={true}
                     label={"აღწერა"}
@@ -313,6 +323,7 @@ const Experiance = () => {
                   <div className={style.Border}></div>
                 </div>
               ))}
+              
             <button
               onClick={handleClick}
               className={style.AdditionalExperiance}
@@ -329,20 +340,15 @@ const Experiance = () => {
             </div>
           </form>
         </div>
-        {/* <Resume
-          data={personalData}
+        <Resume
           email={personalData.email}
           number={personalData.number}
           aboutMe={personalData.aboutMe}
           lastName={personalData.lastName}
           name={personalData.name}
-          job={personalData.job}
-          employer={personalData.employer}
-          jobStartDate={personalData.jobStartDate}
-          jobEndDate={personalData.jobEndDate}
-          jobDescription={personalData.jobDescription}
+          experiance={personalData.job}
           img={personalData.image}
-        /> */}
+        />
       </div>
     </section>
   );
