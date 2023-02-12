@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: column;
   gap: 5.4rem;
+  margin-bottom: 3.4rem;
 }
 .PositionParrent {
   display: flex;
@@ -55,6 +56,7 @@
   font-weight: 400;
   font-size: 1.4rem;
   color: #ffffff;
+  margin-bottom: 3.2rem;
 }
 .AdditionalExperiance:hover {
   cursor: pointer;

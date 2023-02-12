@@ -1,9 +1,10 @@
 import style from "./Resume.module.css";
 import Image from "next/image";
+import resumeLogo from "../../public/Resume Logo/LOGO-12 1.png";
 
 const Resume = (props) => {
   const img = props.img;
-
+  console.log(props.data);
   return (
     <div>
       <div className={style.CredantialsAndImgParrent}>
@@ -37,7 +38,8 @@ const Resume = (props) => {
         <div className={style.Heading}>
           <h2>გამოცდილება</h2>
           <p>
-            {props.job} {props.employer}
+            {props.job}
+            {props.employer && ","} {props.employer}
           </p>
           <h3 className={style.Date}>
             {props.jobStartDate} {props.jobStartDate && `-`} {props.jobEndDate}
@@ -58,6 +60,7 @@ const Resume = (props) => {
           </span>
         </div>
       )}
+      <Image alt="Logo" src={resumeLogo} />
     </div>
   );
 };

@@ -40,6 +40,8 @@ const PersonalInformation = () => {
     EducationDate: "",
     EducationIndex: "",
     EducationDescription: "",
+    experianceCount: 1,
+    educationCount: 1,
   });
 
   useEffect(() => {
@@ -64,6 +66,8 @@ const PersonalInformation = () => {
         EducationDate: "",
         EducationIndex: "",
         EducationDescription: "",
+        experianceCount: 1,
+        educationCount: 1,
       };
       setPersonalData(storedData);
     }

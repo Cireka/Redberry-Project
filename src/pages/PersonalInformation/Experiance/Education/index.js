@@ -43,6 +43,8 @@ const Education = () => {
     EducationIndex: "",
     EducationDescription: "",
     imageToSend: "",
+    experianceCount: 1,
+    educationCount: 1,
   });
 
   useEffect(() => {
@@ -68,6 +70,8 @@ const Education = () => {
         EducationIndex: "",
         EducationDescription: "",
         imageToSend: "",
+        experianceCount: 1,
+        educationCount: 1,
       };
       setPersonalData(storedData);
     }
@@ -182,9 +186,6 @@ const Education = () => {
       const imageFile = new File([imageBlob], "profile photo", {
         type: "image/png",
       });
-      let formData = new FormData();
-      formData.append("image", imageFile, "image.png");
-      console.log(imageFile);
 
       let data = {
         name: personalData.name,
