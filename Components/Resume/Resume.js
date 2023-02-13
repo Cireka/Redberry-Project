@@ -96,7 +96,7 @@ const Resume = (props) => {
         </div>
       )}
 
-      <Image alt="Logo" src={resumeLogo} />
+      {props.name.length > 1 && <Image alt="Logo" src={resumeLogo} />}
     </div>
   );
 };
