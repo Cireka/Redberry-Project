@@ -5,7 +5,6 @@ import emailVector from "../../public/Resume Icons/emailVector.png";
 import phoneVector from "../../public/Resume Icons/phoneVector.png";
 
 const Resume = (props) => {
-  console.log(props.experiance);
   const img = props.img;
   return (
     <div>

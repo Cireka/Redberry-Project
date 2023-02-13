@@ -8,7 +8,7 @@ import Inputmask from "react-input-mask";
 const MobileNumberInput = (props) => {
   return (
     <div className={style.wideParrent}>
-      <label className={style.Label} htmlfor={props.for}>
+      <label className={style.Label} htmlFor={props.for}>
         {props.label}
       </label>
       <Image

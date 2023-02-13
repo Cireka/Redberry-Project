@@ -35,17 +35,10 @@ const Experiance = () => {
     job: [{}],
     image: [],
     employer: "",
-    jobStartDate: "",
-    jobEndDate: "",
-    jobDescription: "",
-    education: "",
-    educationDegree: "",
-    EducationDate: "",
-    EducationIndex: "",
-    EducationDescription: "",
+    education: [{}],
     imageToSend: "",
-    experianceCount: 0,
-    educationCount: 0,
+    experianceCount: 1,
+    educationCount: 1,
   });
 
   useEffect(() => {
@@ -62,14 +55,7 @@ const Experiance = () => {
         job: [{}],
         image: [],
         employer: "",
-        jobStartDate: "",
-        jobEndDate: "",
-        jobDescription: "",
-        education: "",
-        educationDegree: "",
-        EducationDate: "",
-        EducationIndex: "",
-        EducationDescription: "",
+        education: [{}],
         imageToSend: "",
         experianceCount: 1,
         educationCount: 1,
@@ -179,13 +165,13 @@ const Experiance = () => {
       }
     }
   };
-  console.log(personalData.experianceCount);
+
   useEffect(() => {
     if (isLocalStorageAvailable) {
       window.localStorage.setItem("personalData", JSON.stringify(personalData));
     }
   }, [isLocalStorageAvailable, personalData]);
-  // console.log(validation[`job${inputSets}`]);
+
 
   useEffect(() => {
     let updatedValidation = { ...validation };

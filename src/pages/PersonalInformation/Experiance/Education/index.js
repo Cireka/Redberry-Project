@@ -46,8 +46,8 @@ const Education = () => {
     employer: "",
     education: [{}],
     imageToSend: "",
-    experianceCount: 0,
-    educationCount: 0,
+    experianceCount: 1,
+    educationCount: 1,
   });
 
   useEffect(() => {
@@ -248,7 +248,7 @@ const Education = () => {
             type: "image/png",
           });
 
-          console.log(personalData.education);
+
 
           let data = {
             name: personalData.name,
@@ -290,10 +290,11 @@ const Education = () => {
             })
             .then((res) => {
               setResponse(res.data);
-              console.log(res.data);
+              router.push("/PersonalInformation/Experiance/Education/Resume");
+              localStorage.clear();
             })
             .catch((err) => {
-              console.error(err);
+
             });
         }
       }

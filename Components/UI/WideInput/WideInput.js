@@ -7,7 +7,7 @@ import wrongInputIcon from "../../../public/Input Icons/wrongInput.png";
 const WideInput = (props) => {
   return (
     <div className={style.wideParrent}>
-      <label className={style.Label} htmlfor={props.for}>
+      <label className={style.Label} htmlFor={props.for}>
         {props.label}
       </label>
       <Image
@@ -57,7 +57,7 @@ const WideInput = (props) => {
         placeholder={props.placeHolder}
         type={props.type}
       />
-      <hint className={style.Hint}>{props.hint}</hint>
+      <p className={style.Hint}>{props.hint}</p>
     </div>
   );
 };

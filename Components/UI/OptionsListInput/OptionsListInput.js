@@ -52,7 +52,7 @@ const OptionsListInput = (props) => {
 
         {data.map((i) => {
           return (
-            <option id={i.id} value={i.title}>
+            <option key={i.id} id={i.id} value={i.title}>
               {i.title}
             </option>
           );

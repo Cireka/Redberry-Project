@@ -60,9 +60,9 @@ const TwinInput = (props) => {
         name={props.name}
       />
       {props.hint && (
-        <hint className={style.Hint}>
+        <p className={style.Hint}>
           {props.customHint ? `${props.customHint}` : "მინიმუმ 2 სიმბოლო"}
-        </hint>
+        </p>
       )}
     </div>
   );

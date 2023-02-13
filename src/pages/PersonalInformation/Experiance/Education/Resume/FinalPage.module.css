@@ -1,0 +1,8 @@
+.FinalPage {
+  max-width: 160rem;
+  margin: 0 auto;
+}
+.ResumeContainer {
+  display: flex;
+  justify-content: center;
+}
