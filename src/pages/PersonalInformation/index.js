@@ -258,7 +258,7 @@ const PersonalInformation = () => {
               id={"email"}
               type={"email"}
               label={"ელ.ფოსტა"}
-              hint={"მინიმუმ 2 ასო, ქართული ასოები"}
+              hint={"უნდა მთავრდებოდეს @redberry.ge-ით"}
             />
             <MobileNumberInput
               style={validation.mobileNumer}
