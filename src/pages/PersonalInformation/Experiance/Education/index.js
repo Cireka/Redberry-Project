@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import Resume from "Components/Resume/Resume";
 import OptionsListInput from "Components/UI/OptionsListInput/OptionsListInput";
 import axios from "axios";
+import Image from "next/image";
+import NavIcon from "../../../../../public/Navigation Icon/NavIcon.png";
 
 const Education = () => {
   const router = useRouter();
@@ -22,10 +24,17 @@ const Education = () => {
     finishDate0: null,
     educationDescription0: null,
   });
+  const [response, setResponse] = useState();
 
   const [inputSets, setInputSets] = useState(0);
 
   const [isLocalStorageAvailable, setIsLocalStorageAvailable] = useState(false);
+
+  useEffect(() => {
+    if (isLocalStorageAvailable) {
+      window.localStorage.setItem("Response", JSON.stringify(response));
+    }
+  }, [isLocalStorageAvailable, response]);
   const [personalData, setPersonalData] = useState({
     name: "",
     lastName: "",
@@ -182,7 +191,7 @@ const Education = () => {
             educationInstitute: "",
           },
         ],
-        experianceCount: personalData.experianceCount + 1,
+        educationCount: personalData.educationCount + 1,
       };
       setValidation(updatedValidation);
       setPersonalData(updatedPersonalData);
@@ -245,7 +254,7 @@ const Education = () => {
             name: personalData.name,
             surname: personalData.lastName,
             email: personalData.email,
-            phone_number: "+995456789101",
+            phone_number: personalData.number.split(" ").join(""),
             experiences: [],
             educations: [],
             image: imageFile,
@@ -275,15 +284,12 @@ const Education = () => {
             });
           }
 
-          // ინდექსი უნდა შევინახოთ
-
-          // https://httpbin.org/post
-          //https://resume.redberryinternship.ge/api/cvs
           axios
             .post("https://resume.redberryinternship.ge/api/cvs", data, {
               headers: { "Content-Type": "multipart/form-data" },
             })
             .then((res) => {
+              setResponse(res.data);
               console.log(res.data);
             })
             .catch((err) => {
@@ -294,10 +300,21 @@ const Education = () => {
     }
   };
 
+  const NavIconClickHandler = () => {
+    localStorage.clear();
+    router.push("/");
+  };
+
   return (
     <section className={style.EducationInformation}>
       <div className={style.EducationIformationContainer}>
         <div className={style.EducationInfoParrent}>
+          <Image
+            onClick={NavIconClickHandler}
+            className={style.navIcon}
+            alt="Navigation Icon"
+            src={NavIcon}
+          />
           <HeadingParrent Text={"განათლება"} Nav={"3/3"} />
           <form onSubmit={formSubmitHandler} className={style.Form}>
             {Array(personalData.educationCount)
@@ -376,10 +393,6 @@ const Education = () => {
           experiance={personalData.job}
           education={personalData.education}
           img={personalData.image}
-          // educationDegree={personalData.educationDegree}
-          // education={personalData.education}
-          // educationDate={personalData.EducationDate}
-          // educationDescription={personalData.EducationDescription}
         />
       </div>
     </section>

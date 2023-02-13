@@ -1,6 +1,8 @@
 import style from "./Resume.module.css";
 import Image from "next/image";
 import resumeLogo from "../../public/Resume Logo/LOGO-12 1.png";
+import emailVector from "../../public/Resume Icons/emailVector.png";
+import phoneVector from "../../public/Resume Icons/phoneVector.png";
 
 const Resume = (props) => {
   console.log(props.experiance);
@@ -13,8 +15,27 @@ const Resume = (props) => {
             {props.name} {props.lastName}
           </h1>
           <div className={style.ContactsParrent}>
-            <p className={style.Contact}>{props.email}</p>
-            <p className={style.Contact}>{props.number}</p>
+            <p className={style.Contact}>
+              {props.email.length >= 1 && (
+                <Image
+                  className={style.ResumeIcons}
+                  alt="emailVector"
+                  src={emailVector}
+                />
+              )}
+              {props.email}
+            </p>
+
+            {props.number.length >= 2 && (
+              <p className={style.Contact}>
+                <Image
+                  className={style.ResumeIcons}
+                  alt="phoneVector"
+                  src={phoneVector}
+                />
+                {props.number}
+              </p>
+            )}
           </div>
           {props.aboutMe && (
             <div className={style.AboutMeParrent}>

@@ -6,6 +6,8 @@ import WideInput from "Components/UI/WideInput/WideInput";
 import AdditionalInformationBox from "Components/UI/AdditionalInformationBox/AdditionalInformationBox";
 import Resume from "Components/Resume/Resume";
 import { useState, useEffect } from "react";
+import Image from "next/image";
+import NavIcon from "../../../../public/Navigation Icon/NavIcon.png";
 
 const Experiance = () => {
   const router = useRouter();
@@ -253,11 +255,21 @@ const Experiance = () => {
       return prevInputSets + 1;
     });
   };
+  const NavIconClickHandler = () => {
+    localStorage.clear();
+    router.push("/");
+  };
 
   return (
     <section className={style.ExperianceIformation}>
       <div className={style.ExperianceIformationContainer}>
         <div className={style.ExperianceInfoParrent}>
+          <Image
+            onClick={NavIconClickHandler}
+            className={style.navIcon}
+            alt="Navigation Icon"
+            src={NavIcon}
+          />
           <HeadingParrent Text={"გამოცდილება"} Nav={"2/3"} />
           <form onSubmit={submitHandler}>
             {Array(personalData.experianceCount)
@@ -323,7 +335,7 @@ const Experiance = () => {
                   <div className={style.Border}></div>
                 </div>
               ))}
-              
+
             <button
               onClick={handleClick}
               className={style.AdditionalExperiance}

@@ -41,7 +41,7 @@ const MobileNumberInput = (props) => {
       />
       <Inputmask
         maskChar=""
-        mask="+999 999 99 99"
+        mask="+999 999 99 99 99"
         className={
           props.style === undefined
             ? style.ErrorInput

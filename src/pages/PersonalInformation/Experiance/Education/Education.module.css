@@ -19,13 +19,10 @@
   gap: 5.4rem;
 }
 
-
-
 .StartAndEndDateParrent {
   display: flex;
   justify-content: space-between;
 }
-
 
 .Border {
   content: "";
@@ -65,4 +62,17 @@
   font-size: 1.6rem;
   letter-spacing: 0.08em;
   color: #ffffff;
+}
+.EducationIformationContainer {
+  position: relative;
+}
+.navIcon {
+  width: 9.21px;
+  height: 16px;
+  position: absolute;
+  top: 10px;
+  left: -100px;
+}
+.navIcon:hover {
+  cursor: pointer;
 }

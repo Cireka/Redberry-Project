@@ -2,10 +2,7 @@
   max-width: 160rem;
   margin: 0 auto;
 }
-.ExperianceIformation {
-  max-width: 160rem;
-  margin: 0 auto;
-}
+
 .ExperianceIformationContainer {
   margin-top: 4.5rem;
   display: grid;
@@ -93,4 +90,17 @@
 }
 .NavButtons:active {
   background-color: #512faf;
+}
+.ExperianceInfoParrent {
+  position: relative;
+}
+.navIcon {
+  width: 9.21px;
+  height: 16px;
+  position: absolute;
+  top: 10px;
+  left: -100px;
+}
+.navIcon:hover {
+  cursor: pointer;
 }

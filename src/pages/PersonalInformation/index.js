@@ -9,7 +9,8 @@ import { useState, useEffect } from "react";
 import Resume from "Components/Resume/Resume";
 import MobileNumberInput from "Components/UI/MobileNumberINput/MobileNumberInput";
 import ImageInput from "Components/UI/ImageInput/ImageInput";
-import { useRef } from "react";
+import Image from "next/image";
+import NavIcon from "../../../public/Navigation Icon/NavIcon.png";
 
 const PersonalInformation = () => {
   const router = useRouter(null);
@@ -147,12 +148,12 @@ const PersonalInformation = () => {
     }
 
     if (
-      personalData.number.length === 14 &&
+      personalData.number.length === 17 &&
       personalData.number.substring(0, 4) === "+995"
     ) {
       updatedValidation.mobileNumer = true;
     } else if (
-      personalData.number.length !== 14 &&
+      personalData.number.length !== 17 &&
       personalData.number !== ""
     ) {
       updatedValidation.mobileNumer = false;
@@ -203,10 +204,21 @@ const PersonalInformation = () => {
     }
   };
 
+  const NavIconClickHandler = () => {
+    localStorage.clear();
+    router.push("/");
+  };
+
   return (
     <section className={style.PersonalInformation}>
       <div className={style.PersonalInformationContainer}>
         <div className={style.PersonalInfoFormParrent}>
+          <Image
+            onClick={NavIconClickHandler}
+            className={style.navIcon}
+            alt="Navigation Icon"
+            src={NavIcon}
+          />
           <HeadingParrent Text={"პირადი ინფო"} Nav={"1/3"} />
           <form onSubmit={SubmitHandler} className={style.Form}>
             <div className={style.NameAndLastNameParrent}>

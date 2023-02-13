@@ -12,6 +12,8 @@
   gap: 1rem;
 }
 .Contact {
+  display: flex;
+  align-items: center;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -93,4 +95,9 @@
 .CredantialsAndImgParrent {
   display: flex;
   justify-content: space-between;
+}
+.ResumeIcons {
+  width: 16px;
+  height: 16px;
+  margin-right: 1.2rem;
 }
