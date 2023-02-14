@@ -63,7 +63,14 @@
   letter-spacing: 0.08em;
   color: #ffffff;
 }
-.EducationIformationContainer {
+.NavButtons:hover {
+  cursor: pointer;
+  background-color: #7949ff;
+}
+.NavButtons:active {
+  background-color: #512faf;
+}
+.Ex .EducationIformationContainer {
   position: relative;
 }
 .navIcon {
